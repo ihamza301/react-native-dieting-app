@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { View, TouchableOpacity, Image, Text, Alert, FlatList, ScrollView, StyleSheet, ImageBackground, Button,
-  ToastAndroid } from 'react-native';
+  ToastAndroid, Dimensions } from 'react-native';
 import MyHeader from '../Hamza_Iftikhar/MyHeader.js';
+
+var {width, height} = Dimensions.get('window');
 
 export default class CoachingScreen extends React.Component {
 
@@ -31,59 +33,65 @@ export default class CoachingScreen extends React.Component {
           <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} homeScreen = {false}/>
           <ScrollView showsVerticalScrollIndicator = {false}>
             <View style={styles.headerTop}>
-              <Text style={styles.textTop}>Physical Coaching not available for now due to current pandemic. Thank you</Text>
+              <Text style={styles.textTop} adjustsFontSizeToFit numberOfLines={2}>Physical Coaching not available for now due to current pandemic. Thank you.</Text>
             </View>
 
             <View style = {styles.bodyContainer}>
               <View style = {styles.columnContainer}>
                 <Text>Live Coaching</Text>
+                <View style = {styles.iconContainer}>
+                  <Image style = {styles.iconImage} source = {require('./assets/Second.png')} resizeMode = "cover"/>
+                </View>
+                <View style = {styles.backgroundImageContainer}>
+                  <ImageBackground style = {styles.backgroundImage} source={require('./assets/First.png')} resizeMode="cover">
+                    <View style = {{height : width * 0.3, marginTop : width * 0.35 * 0.5, marginHorizontal : 10}}>
+                      <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/session </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 5000 </Text>
 
-                <ImageBackground style = {styles.backgroundImage} source={require('./assets/livecoaching.png')} resizeMode="contain">
-                  <View style = {{marginTop : '70%'}}>
-                    <Text style = {[styles.labelText, {marginLeft : '15%'}]}> Price/session </Text>
-                    <Text style = {[styles.labelText, {marginLeft : '55%'}]}> 5000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/4 session </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 20000 </Text>
 
-                    <Text style = {[styles.labelText, {marginLeft : '15%'}]}> Price/4 session </Text>
-                    <Text style = {[styles.labelText, {marginLeft : '55%'}]}> 20000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/5 session </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 25000 </Text>
 
-                    <Text style = {[styles.labelText, {marginLeft : '15%'}]}> Price/5 session </Text>
-                    <Text style = {[styles.labelText, {marginLeft : '55%'}]}> 25000 </Text>
-
-                    <Text style = {[styles.labelText, {marginLeft : '15%'}]}> Duration </Text>
-                    <Text style = {[styles.labelText, {marginLeft : '55%'}]}> 60 Minutes </Text>
-
+                      <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Duration </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 60 Minutes </Text>
+                    </View>
                     <TouchableOpacity style = {styles.submitButton} onPress = {() => this.submitLiveCoaching()}>
-                      <Text style={{color:this.props.route.params.themeColor, fontWeight: 'bold'}}>
-                        SUBMIT
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </ImageBackground>
+                        <Text style={{color:this.props.route.params.themeColor, fontWeight: 'bold', fontSize: 16}} adjustsFontSizeToFit numberOfLines={1}>
+                          SUBMIT
+                        </Text>
+                      </TouchableOpacity>
+                  </ImageBackground>
+                </View>
               </View>
               <View style = {styles.columnContainer}>
                 <Text>Physical Coaching</Text>
+                <View style = {styles.iconContainer}>
+                  <Image style = {styles.iconImage} source = {require('./assets/Third.png')} resizeMode = "cover"/>
+                </View>
+                <View style = {styles.backgroundImageContainer}>
+                  <ImageBackground style = {styles.backgroundImage} source={require('./assets/First.png')} resizeMode="cover">
+                  <View style = {{height : width * 0.3, marginTop : width * 0.35 * 0.5, marginHorizontal : 10}}>
+                      <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/session </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 5000 </Text>
 
-                <ImageBackground style = {styles.backgroundImage} source={require('./assets/physicalcoaching.png')} resizeMode="contain">
-                  <View style = {{marginTop : '70%'}}>
-                    <Text style = {[styles.labelText, {marginLeft : '15%'}]}> Price/session </Text>
-                    <Text style = {[styles.labelText, {marginLeft : '55%'}]}> 5000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/4 session </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 20000 </Text>
 
-                    <Text style = {[styles.labelText, {marginLeft : '15%'}]}> Price/4 session </Text>
-                    <Text style = {[styles.labelText, {marginLeft : '55%'}]}> 20000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/5 session </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 25000 </Text>
 
-                    <Text style = {[styles.labelText, {marginLeft : '15%'}]}> Price/5 session </Text>
-                    <Text style = {[styles.labelText, {marginLeft : '55%'}]}> 25000 </Text>
-
-                    <Text style = {[styles.labelText, {marginLeft : '15%'}]}> Duration </Text>
-                    <Text style = {[styles.labelText, {marginLeft : '55%'}]}> 60 Minutes </Text>
-
-                    <TouchableOpacity style = {styles.submitButton} onPress = {() => this.submitPhysicalCoaching()} disabled = {true}>
-                      <Text style={{color:this.props.route.params.themeColor, fontWeight: 'bold'}}>
-                        SUBMIT
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </ImageBackground>
+                      <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Duration </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 60 Minutes </Text>
+                    </View>
+                    <TouchableOpacity style = {styles.submitButton} onPress = {() => this.submitLiveCoaching()}>
+                        <Text style={{color:this.props.route.params.themeColor, fontWeight: 'bold', fontSize: 16}} adjustsFontSizeToFit numberOfLines={1}>
+                          SUBMIT
+                        </Text>
+                      </TouchableOpacity>
+                  </ImageBackground>
+                </View>
               </View>
             </View>
           </ScrollView>
@@ -108,33 +116,44 @@ const styles = StyleSheet.create({
     alignSelf : 'center'
   },
   textTop: {
-    fontSize: 16,
+    fontSize: width / 24,
     textAlign : 'center'
   },
   bodyContainer : {
     flexDirection : 'row',
-    width : "90%",
-    marginVertical : '5%',
-    alignSelf : 'center',
-    justifyContent : 'space-evenly',
-    alignItems : 'center'
+    width : '90%',
+    justifyContent: 'space-around',
+    alignSelf : 'center'
   },
   columnContainer : {
     flexDirection : 'column',
-    width : "40%",
-    justifyContent : 'center',
-    alignItems : 'center'
+    alignItems : 'center',
+    width : '100%'
+  },
+  iconContainer:
+  {
+    width : width * 0.3,
+    height : width * 0.3
+  },
+  iconImage : {
+    height : '100%',
+    width : '100%',
+    overflow : 'visible'
+  },
+  backgroundImageContainer : 
+  {
+    marginTop : -30,
+    width : width * 0.35,
+    height : width * 0.7
   },
   backgroundImage : {
-    width : '100%',
     height : '100%',
-    marginVertical : 20,
-    backgroundColor : 'red'
+    width : '100%',
+    overflow : 'visible'
   },
   labelText : {
-    fontSize:12,
+    fontSize: width / 36,
     color:'white',
-    marginTop : 1
   },
   submitButton : {
     marginVertical : 15,
@@ -144,8 +163,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius : 5,
     borderWidth : 1,
     borderColor : 'white',
-    width : '50%',
-    height : 30,
+    width : width * 0.35 * 0.4,
+    height : width * 0.7 * 0.1,
     alignContent : 'center',
     justifyContent : 'center',
     alignSelf : 'center'
