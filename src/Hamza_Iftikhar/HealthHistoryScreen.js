@@ -73,10 +73,10 @@ export default class HealthHistoryScreen extends React.Component
             'physicallyActive': this.state.physicalInfo_physicallyActive,
             'dailyExercise': this.state.physicalInfo_dailyExercise,
             'foodTiming': this.state.foodDetails_breakToDinnerEatingRoutine,
-            'exerciseTimeMoring': this.state.exerciseDetails_morning,
-            'exerciseTimeAfternoon': this.state.exerciseDetails_afternoon,
-            'exerciseTimeEvening': this.state.exerciseDetails_evening,
-            'exerciseTimeNight': this.state.exerciseDetails_night,
+            'exerciseTimeMoring': this.state.exerciseDetails_morning ? 'Yes' : 'No',
+            'exerciseTimeAfternoon': this.state.exerciseDetails_afternoon ? 'Yes' : 'No',
+            'exerciseTimeEvening': this.state.exerciseDetails_evening ? 'Yes' : 'No',
+            'exerciseTimeNight': this.state.exerciseDetails_night ? 'Yes' : 'No',
             'exerciseFrom': this.state.exerciseDetails_duration,
             'exercisePortionSize': this.state.portionSize,
             'waterQuantity': this.state.waterQuantity,
@@ -92,6 +92,8 @@ export default class HealthHistoryScreen extends React.Component
             'relevantInfoDescription': this.state.relevantInformationDetails,
             'user_id': this.props.route.params.userId
         };
+
+        console.log(data);
 
         this.setState({visible : true});
 
@@ -163,8 +165,8 @@ export default class HealthHistoryScreen extends React.Component
                         mode = 'dropdown'
                         onValueChange = {(value) => this.setState({personalInfo_gender : value})}
                         style = {{height : 40}}>
-                            <Picker.Item label="Male" value="male" />
-                            <Picker.Item label="Female" value="female" />
+                            <Picker.Item label="Male" value="Male" />
+                            <Picker.Item label="Female" value="Female" />
                     </Picker>
                 </View>
 
