@@ -16,6 +16,8 @@ import DietPlanScreen from './src/Muhammad_Sharjeel/DietPlanScreen.js'
 import WishlistScreen from './src/Hamza_Iftikhar/Wishlist_Screen_Items/WishlistScreen';
 import ProductScreen from './src/Hamza_Iftikhar/Product_Screen_Items/ProductScreen';
 import ProductsMenu from './src/Hamza_Iftikhar/Product_Screen_Items/ProductsMenu';
+import AddressAndDetailScreen from './src/Hamza_Iftikhar/AddressAndDetailScreen.js';
+import ContactUsScreen from './src/Hamza_Iftikhar/ContactUsScreen.js';
 
 import { Provider } from 'react-native-paper';
 
@@ -41,10 +43,10 @@ export default class App extends React.Component {
       return(
         <CoachingScreensStack.Navigator initialRouteName = 'Coaching-Home' headerMode = 'none'>
           <CoachingScreensStack.Screen name = 'Coaching-Home' component = {CoachingHomeScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
-          <SideMenuDrawer.Screen name= 'Select' component={CoachingScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
-          <SideMenuDrawer.Screen name= 'Payment' component={PaymentScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
-          <SideMenuDrawer.Screen name= 'Health' component={HealthHistoryScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
-          <SideMenuDrawer.Screen name= 'Diet' component={DietPlanScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
+          <CoachingScreensStack.Screen name= 'Select' component={CoachingScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
+          <CoachingScreensStack.Screen name= 'Payment' component={PaymentScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
+          <CoachingScreensStack.Screen name= 'Health' component={HealthHistoryScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
+          <CoachingScreensStack.Screen name= 'Diet' component={DietPlanScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
         </CoachingScreensStack.Navigator>
       );
     }
@@ -62,8 +64,8 @@ export default class App extends React.Component {
           <SideMenuDrawer.Screen name="Orders" component={ComingSoonScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
           <SideMenuDrawer.Screen name="FAQ" component={ComingSoonScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
           <SideMenuDrawer.Screen name="Blog" component={ComingSoonScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
-          <SideMenuDrawer.Screen name="Contact" component={ComingSoonScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
-          <SideMenuDrawer.Screen name="Address" component={ComingSoonScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
+          <SideMenuDrawer.Screen name="Contact" component={ContactUsScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
+          <SideMenuDrawer.Screen name="Address" component={AddressAndDetailScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
           <SideMenuDrawer.Screen name="Wishlist" component={WishlistScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email}}/>
         </SideMenuDrawer.Navigator>
       );

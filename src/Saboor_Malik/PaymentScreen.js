@@ -74,7 +74,7 @@ export default class PaymentScreen extends React.Component {
                 if(response.data["status"] === "okay")
                 {
                     this.setState({visible : false});
-                    Alert.alert("Submission Status", "Data submitted successfully", [{text : "Ok", onPress : () => this.props.navigation.goBack(), style : 'default'}]);
+                    Alert.alert("Submission Status", "Data submitted successfully", [{text : "Ok", onPress : () => this.props.navigation.navigate('Coaching-Home'), style : 'default'}]);
                 }
             }).
             catch(error => {

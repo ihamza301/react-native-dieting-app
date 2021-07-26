@@ -97,7 +97,7 @@ export default class SignUpScreen extends React.Component {
                     {/* <Text style={styles.pageHeading}>Register</Text> */}
 
                     <View style={styles.inputView}>
-                        <Image style={styles.inputImage} source={require('./assets/images/name.png')} />
+                        <Image style={styles.inputImage} source={require('./assets/images/name.png')} resizeMode = 'contain'/>
                         <TextInput
                             style={styles.textInput}
                             placeholder="Name *"
@@ -109,7 +109,7 @@ export default class SignUpScreen extends React.Component {
                     </View>
 
                     <View style={styles.inputView}>
-                        <Image style={styles.inputImage} source={require('./assets/images/email.png')} />
+                        <Image style={styles.inputImage} source={require('./assets/images/email.png')} resizeMode = 'contain'/>
                         <TextInput
                             style={styles.textInput}
                             placeholder="Email *"
@@ -122,7 +122,7 @@ export default class SignUpScreen extends React.Component {
                     </View>
 
                     <View style={styles.inputView}>
-                        <Image style={styles.inputImage} source={require('./assets/images/password.png')} />
+                        <Image style={styles.inputImage} source={require('./assets/images/password.png')} resizeMode = 'contain'/>
                         <TextInput
                             style={styles.textInput}
                             placeholder="Password *"
@@ -135,7 +135,7 @@ export default class SignUpScreen extends React.Component {
                     </View>
 
                     <View style={styles.inputView}>
-                        <Image style={styles.inputImage} source={require('./assets/images/cal_now.png')} />
+                        <Image style={styles.inputImage} source={require('./assets/images/cal_now.png')} resizeMode = 'contain'/>
                         <TextInput
                             style={styles.textInput}
                             placeholder="Phone No *"
@@ -148,7 +148,7 @@ export default class SignUpScreen extends React.Component {
                     </View>
 
                     <View style={styles.inputView}>
-                        <Image style={styles.inputImage} source={require('./assets/images/address.png')} />
+                        <Image style={styles.inputImage} source={require('./assets/images/address.png')} resizeMode = 'contain'/>
                         <View style={{ height : 40, justifyContent : 'center', flex : 1}}>
                             <Picker
                                 selectedValue = {this.state.city}
