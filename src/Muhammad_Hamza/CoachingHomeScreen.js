@@ -29,7 +29,8 @@ export default class CoachingHomeScreen extends Component {
       visible : false,
       approved : false,
       pending : false,
-      applied : false
+      applied : false,
+      expired : false
     }
   }
 
@@ -62,15 +63,19 @@ export default class CoachingHomeScreen extends Component {
         console.log('Data is =',response.data["response"]["Status"]);
         if(response.data['response']['Status'] == 'pending')
         {
-          this.setState({pending : true, approved : false, applied : true});
+          this.setState({pending : true, approved : false, applied : true, expired : false});
         }
         else if(response.data['response']['Status'] == 'approved')
         {
-          this.setState({pending : false, approved : true, applied : true});
+          this.setState({pending : false, approved : true, applied : true, expired : false});
         }
         else if(response.data['response']['Status'] == 'cant find such slip')
         {
-          this.setState({pending : false, approved : false, applied : false});
+          this.setState({pending : false, approved : false, applied : false, expired : false});
+        }
+        else if(response.data['response']['Status'] == '0')
+        {
+          this.setState({pending : false, approved : false, applied : false, expired : true});
         }
         // this.setState({pending : false, approved : false, applied : false});
         // this.setState({approved : true});
@@ -147,6 +152,10 @@ export default class CoachingHomeScreen extends Component {
                 ) : !this.state.applied?(
                   <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '80%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
                     <Text style={styles.textTop}>Please create your payment request.</Text>
+                  </View>
+                ) : this.state.expired?(
+                  <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '80%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
+                    <Text style={styles.textTop}>Sessions Expired. Please create your payment request.</Text>
                   </View>
                 ) : null}
 
