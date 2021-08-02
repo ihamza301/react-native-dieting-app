@@ -146,16 +146,16 @@ export default class CoachingHomeScreen extends Component {
               <View style = {{flex : 1}}>
                 {/* App Bar  */}
                 {this.state.pending?(
-                  <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '80%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
+                  <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '85%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
                     <Text style={styles.textTop}>Please wait for Payment approval.</Text>
                   </View>
-                ) : !this.state.applied?(
-                  <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '80%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
-                    <Text style={styles.textTop}>Please create your payment request.</Text>
-                  </View>
                 ) : this.state.expired?(
-                  <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '80%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
+                  <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '85%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
                     <Text style={styles.textTop}>Sessions Expired. Please create your payment request.</Text>
+                  </View>
+                ) : !this.state.applied?(
+                  <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '85%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
+                    <Text style={styles.textTop}>Please create your payment request.</Text>
                   </View>
                 ) : null}
 
@@ -165,7 +165,7 @@ export default class CoachingHomeScreen extends Component {
                       Coaching:
                     </Text>
 
-                    <TouchableOpacity style={[{backgroundColor : !this.state.applied ? this.props.route.params.themeColor : 'grey'}, styles.button]} onPress={() => this.goToSelectScreen()} disabled = {this.state.applied}>
+                    <TouchableOpacity style={[{backgroundColor : (!this.state.applied || this.state.expired) ? this.props.route.params.themeColor : 'grey'}, styles.button]} onPress={() => this.goToSelectScreen()} disabled = {this.state.applied}>
                       <Text style={{color: 'lightgrey'}}>Create +</Text>
                     </TouchableOpacity>
                   </View>
@@ -221,7 +221,7 @@ export default class CoachingHomeScreen extends Component {
                     />
 
                     <TouchableOpacity
-                      disabled = {!this.state.approved}
+                      disabled = {!this.state.approved || this.state.expired}
                       style={[{borderColor : this.state.approved ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
                       onPress={() => this.goToHealthHistory()}>
                       <Text style={styles.buttontext}>HEALTH HISTORY</Text>
@@ -235,8 +235,8 @@ export default class CoachingHomeScreen extends Component {
                     <Image style={styles.tinyLogo} source={require('./img/diet.png')} />
 
                     <TouchableOpacity
-                      disabled = {!this.state.approved}
-                      style={[{borderColor : this.state.approved ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
+                      disabled = {this.state.approved ? false : this.state.expired ? false : true}
+                      style={[{borderColor : (this.state.approved || this.state.expired) ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
                       onPress={() => this.goToDietPlan()}>
                       <Text style={styles.buttontext}>DIET PLAN</Text>
                     </TouchableOpacity>
@@ -256,6 +256,7 @@ export default class CoachingHomeScreen extends Component {
 const styles = StyleSheet.create({
   textTop: {
     fontSize: 16,
+    textAlign : 'center'
   },
   button: {
     width: '25%',

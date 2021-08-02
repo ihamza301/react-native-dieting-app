@@ -47,7 +47,7 @@ export default class PaymentScreen extends React.Component {
             formData.append('email', this.props.route.params.email);
             formData.append('name', this.state.name);
             formData.append('amount', this.state.selectedValue == '1' ? '5000' : this.state.selectedValue == '2' ? '20000' : '25000');
-            formData.append('package', this.state.selectedValue == '1' ? '1 Session' : this.state.selectedValue == '2' ? '2 Sessions' : '4 Sessions');
+            formData.append('package', this.state.selectedValue == '1' ? '1 Session' : this.state.selectedValue == '2' ? '4 Sessions' : '5 Sessions');
             formData.append('user_id', this.props.route.params.userId);
             formData.append('file', 
             {
@@ -137,8 +137,8 @@ export default class PaymentScreen extends React.Component {
                                     onValueChange = {(value) => this.setState({selectedValue : value})}
                                     style = {[styles.dropDownLabel, {height : 30}]}>
                                         <Picker.Item label="1 Session (5,000)" value="1" style = {styles.dropDownLabel}/>
-                                        <Picker.Item label="2 Session (20,000)" value="2" style = {styles.dropDownLabel}/>
-                                        <Picker.Item label="4 Session (25,000)" value="3" style = {styles.dropDownLabel}/>
+                                        <Picker.Item label="4 Session (20,000)" value="2" style = {styles.dropDownLabel}/>
+                                        <Picker.Item label="5 Session (25,000)" value="3" style = {styles.dropDownLabel}/>
                                 </Picker>
                             </View>
 
