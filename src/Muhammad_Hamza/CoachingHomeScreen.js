@@ -30,7 +30,8 @@ export default class CoachingHomeScreen extends Component {
       approved : false,
       pending : false,
       applied : false,
-      expired : false
+      remainingPaymentSessions : 0,
+      remainingCalenderlyMeetings : 0
     }
   }
 
@@ -63,19 +64,21 @@ export default class CoachingHomeScreen extends Component {
         console.log('Data is =',response.data["response"]["Status"]);
         if(response.data['response']['Status'] == 'pending')
         {
-          this.setState({pending : true, approved : false, applied : true, expired : false});
+          this.setState({pending : true, approved : false, applied : true});
         }
         else if(response.data['response']['Status'] == 'approved')
         {
-          this.setState({pending : false, approved : true, applied : true, expired : false});
+          this.setState({pending : false, approved : true, applied : true});
+          this.setState({remainingPaymentSessions : response.data['response']['Payment Status']});
+          this.setState({remainingCalenderlyMeetings : response.data['response']['calendly_status']});
         }
         else if(response.data['response']['Status'] == 'cant find such slip')
         {
-          this.setState({pending : false, approved : false, applied : false, expired : false});
+          this.setState({pending : false, approved : false, applied : false});
         }
         else if(response.data['response']['Status'] == '0')
         {
-          this.setState({pending : false, approved : false, applied : false, expired : true});
+          this.setState({pending : false, approved : false, applied : false});
         }
         // this.setState({pending : false, approved : false, applied : false});
         // this.setState({approved : true});
@@ -149,7 +152,7 @@ export default class CoachingHomeScreen extends Component {
                   <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '85%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
                     <Text style={styles.textTop}>Please wait for Payment approval.</Text>
                   </View>
-                ) : this.state.expired?(
+                ) : this.state.remainingCalenderlyMeetings <= 0 ?(
                   <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '85%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
                     <Text style={styles.textTop}>Sessions Expired. Please create your payment request.</Text>
                   </View>
@@ -165,7 +168,7 @@ export default class CoachingHomeScreen extends Component {
                       Coaching:
                     </Text>
 
-                    <TouchableOpacity style={[{backgroundColor : (!this.state.applied || this.state.expired) ? this.props.route.params.themeColor : 'grey'}, styles.button]} onPress={() => this.goToSelectScreen()} disabled = {this.state.applied}>
+                    <TouchableOpacity style={[{backgroundColor : (!this.state.applied || this.state.remainingCalenderlyMeetings <= 0) ? this.props.route.params.themeColor : 'grey'}, styles.button]} onPress={() => this.goToSelectScreen()} disabled = {this.state.applied && this.state.remainingCalenderlyMeetings > 0}>
                       <Text style={{color: 'lightgrey'}}>Create +</Text>
                     </TouchableOpacity>
                   </View>
@@ -174,8 +177,8 @@ export default class CoachingHomeScreen extends Component {
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', alignContent : 'center', marginVertical : 30}}>
                     <Image style={styles.tinyLogo} source={require('./img/calendar.png')}/>
                     <TouchableOpacity
-                      disabled = {!this.state.approved}
-                      style={[{borderColor : this.state.approved ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
+                      disabled = {!this.state.approved || this.state.remainingCalenderlyMeetings <= 0}
+                      style={[{borderColor : (this.state.approved && this.state.remainingCalenderlyMeetings > 0) ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
                       onPress={() => {
                         this.setState({show: true});
                       }}>
@@ -221,8 +224,8 @@ export default class CoachingHomeScreen extends Component {
                     />
 
                     <TouchableOpacity
-                      disabled = {!this.state.approved || this.state.expired}
-                      style={[{borderColor : this.state.approved ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
+                      disabled = {!this.state.approved || this.state.remainingPaymentSessions <= 0}
+                      style={[{borderColor : (this.state.approved && this.state.remainingPaymentSessions > 0) ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
                       onPress={() => this.goToHealthHistory()}>
                       <Text style={styles.buttontext}>HEALTH HISTORY</Text>
                     </TouchableOpacity>
@@ -235,8 +238,8 @@ export default class CoachingHomeScreen extends Component {
                     <Image style={styles.tinyLogo} source={require('./img/diet.png')} />
 
                     <TouchableOpacity
-                      disabled = {this.state.approved ? false : this.state.expired ? false : true}
-                      style={[{borderColor : (this.state.approved || this.state.expired) ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
+                      disabled = {!this.state.approved}
+                      style={[{borderColor : this.state.approved ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
                       onPress={() => this.goToDietPlan()}>
                       <Text style={styles.buttontext}>DIET PLAN</Text>
                     </TouchableOpacity>
