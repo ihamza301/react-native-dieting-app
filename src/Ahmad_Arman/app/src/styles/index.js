@@ -5,27 +5,24 @@ const STYLES = StyleSheet.create({
   
   inputContainer: {
     flexDirection: 'row', 
-    marginTop: 20
+    marginTop: 20,
+    alignContent : 'space-between',
+    justifyContent :'space-between'
   },
   
   input: {
-    color: COLORS.light,
-    paddingLeft: 30,
+    color: 'black',
+    marginLeft : 10,
     borderBottomWidth: 1,
-    borderColor: COLORS.light,
+    borderColor: 'black',
     borderBottomWidth: 0.5,
     flex: 1,
     fontSize: 18,
+    backgroundColor : 'white'
   },
 
   inputIcon: {
-    marginTop: 15, 
-    position: 'absolute'
-  },
-
-  inputIcon: {
-    marginTop: 15, 
-    position: 'absolute'
+    marginTop: 15,
   },
     
     btnPrimary: {

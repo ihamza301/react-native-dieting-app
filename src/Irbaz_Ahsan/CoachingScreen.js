@@ -30,7 +30,7 @@ export default class CoachingScreen extends React.Component {
     {
       return(
         <View style = {styles.mainContainer}>
-          <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} homeScreen = {false}/>
+          <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {false}/>
           <ScrollView showsVerticalScrollIndicator = {false}>
             <View style={styles.headerTop}>
               <Text style={styles.textTop} adjustsFontSizeToFit numberOfLines={2}>Physical Coaching not available for now due to current pandemic. Thank you.</Text>

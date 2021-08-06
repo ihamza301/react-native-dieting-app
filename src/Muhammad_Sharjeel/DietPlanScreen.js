@@ -208,7 +208,7 @@ export default class DietPlanScreen extends React.Component {
             ):(null)
           }
             
-        <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} homeScreen = {false}/>
+            <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {false}/>
         
         {this.DATA.length == 0 ? (
           <View>

@@ -132,7 +132,7 @@ export default class CoachingHomeScreen extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} homeScreen = {true}/>
+        <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {true}/>
         {this.state.visible?(
             <AnimatedLoader
               visible={this.state.visible}
@@ -152,13 +152,13 @@ export default class CoachingHomeScreen extends Component {
                   <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '85%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
                     <Text style={styles.textTop}>Please wait for Payment approval.</Text>
                   </View>
-                ) : this.state.remainingCalenderlyMeetings <= 0 ?(
-                  <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '85%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
-                    <Text style={styles.textTop}>Sessions Expired. Please create your payment request.</Text>
-                  </View>
                 ) : !this.state.applied?(
                   <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '85%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
                     <Text style={styles.textTop}>Please create your payment request.</Text>
+                  </View>
+                ) : this.state.remainingCalenderlyMeetings <= 0 ?(
+                  <View style={{marginVertical : 20, backgroundColor: 'lightgrey', width: '85%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf : 'center'}}>
+                    <Text style={styles.textTop}>Sessions Expired. Please create your payment request.</Text>
                   </View>
                 ) : null}
 
@@ -168,7 +168,7 @@ export default class CoachingHomeScreen extends Component {
                       Coaching:
                     </Text>
 
-                    <TouchableOpacity style={[{backgroundColor : (!this.state.applied || this.state.remainingCalenderlyMeetings <= 0) ? this.props.route.params.themeColor : 'grey'}, styles.button]} onPress={() => this.goToSelectScreen()} disabled = {this.state.applied && this.state.remainingCalenderlyMeetings > 0}>
+                    <TouchableOpacity style={[{backgroundColor : (!this.state.applied || (this.state.approved && this.state.remainingCalenderlyMeetings <= 0)) ? this.props.route.params.themeColor : 'grey'}, styles.button]} onPress={() => this.goToSelectScreen()} disabled = {!this.state.approved ? this.state.applied : this.state.calendly_status > 0}>
                       <Text style={{color: 'lightgrey'}}>Create +</Text>
                     </TouchableOpacity>
                   </View>
@@ -207,6 +207,7 @@ export default class CoachingHomeScreen extends Component {
                             size={35}
                             onPress={() => {
                               this.setState({show: false});
+                              this.fetchDataFromAPI();
                             }}
                           />
                         </View>
@@ -224,8 +225,8 @@ export default class CoachingHomeScreen extends Component {
                     />
 
                     <TouchableOpacity
-                      disabled = {!this.state.approved || this.state.remainingPaymentSessions <= 0}
-                      style={[{borderColor : (this.state.approved && this.state.remainingPaymentSessions > 0) ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
+                      disabled = {!this.state.approved}
+                      style={[{borderColor : (this.state.approved) ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
                       onPress={() => this.goToHealthHistory()}>
                       <Text style={styles.buttontext}>HEALTH HISTORY</Text>
                     </TouchableOpacity>

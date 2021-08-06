@@ -93,7 +93,7 @@ export default class WishlistScreen extends React.Component
 
         return(
             <View>
-                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} homeScreen = {true}/>
+                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {true}/>
 
                 <FlatList
                     style = {{margin : 10, backgroundColor : "#fff"}}

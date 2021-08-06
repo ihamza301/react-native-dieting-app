@@ -78,7 +78,7 @@ export default class ProductsMenu extends React.Component
 
         return(
             <View style = {{flex : 1}}>
-                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} homeScreen = {false}/>
+                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {false}/>
 
                 <FlatList
                     style = {{margin : 0, backgroundColor : "#fff"}}

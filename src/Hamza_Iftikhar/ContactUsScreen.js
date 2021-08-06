@@ -16,7 +16,7 @@ export default class ContactUsScreen extends React.Component
     {
         return(
             <View style = {{flex : 1}}>
-                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} homeScreen = {true}/>
+                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {true}/>
                 <ScrollView style = {{backgroundColor : 'white'}} showsVerticalScrollIndicator = {false}>
                     <Text style = {[styles.headerText, {color : this.props.route.params.themeColor, }]} adjustsFontSizeToFit numberOfLines = {1}>Contact Us:</Text>
                     <View style = {styles.container}>

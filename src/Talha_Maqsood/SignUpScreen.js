@@ -57,6 +57,38 @@ export default class SignUpScreen extends React.Component {
         this.props.navigation.goBack();
     }
 
+    logInNow()
+    {
+        this.setState({visible:true});
+        const data = 
+        { 
+          'email':this.state.email,
+          'password':this.state.password
+        };
+
+        const headers = { 
+            'content-type':'application/json'
+        };
+
+        axios.post('https://thefoodpharmacy.general.greengrapez.com/api/auth/login', data, {headers}).
+        then(response => {
+            this.setState({visible:false});
+            if(response.data["status"] === "error")
+            {
+                Alert.alert("Error", response.data["response"]);
+            }
+
+            if(response.data["status"] === "okay")
+            {
+              this.props.navigation.navigate('AfterLogIn', {themeColor : this.props.route.params.themeColor, token : response.data["response"]["jwt"], userId : response.data["user"]["id"], email : this.state.email, name : response.data["user"]["name"]})
+            }
+        }).
+        catch(error => {
+            Alert.alert("Error", error.message);
+            this.setState({visible:false});
+        });
+    }
+
     signUpFunction() {
         const { email, password, name, phone, city } = this.state
         var params = {
@@ -75,7 +107,7 @@ export default class SignUpScreen extends React.Component {
                     "Access-Control-Allow-Origin": "*",
                 },
             }).then((response) => {
-                Alert.alert("Sign Up Successful", "Go Back and log in now.", [{text : "Log In", onPress : () => this.backToLogIn(), style : 'default'}]);
+                Alert.alert("Sign Up Successful", "Go Back and log in now.", [{text : "Log In", onPress : () => this.logInNow(), style : 'default'}]);
                 this.setState({visible:false});
             }).catch((err) => {
                 Alert.alert("Error", err.response.data.response.message);
@@ -229,6 +261,7 @@ const styles = StyleSheet.create({
 
     textInput: {
         flex: 1,
+        backgroundColor : 'white'
     },
 
     signupBtn: {

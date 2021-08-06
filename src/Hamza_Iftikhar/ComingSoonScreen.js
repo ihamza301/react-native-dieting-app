@@ -6,14 +6,14 @@ import MyHeader from './MyHeader';
 export default class ComingSoonScreen extends Component {
 
     backAction = () => {
-        Alert.alert("Hold on!", "Are you sure you want to go back?", [
+        Alert.alert("Hold on!", "Are you sure you want to go exit?", [
             {
             text: "Cancel",
             onPress: () => null,
             style: "cancel"
             },
-            // { text: "YES", onPress: () => BackHandler.exitApp() }
-            { text: "YES", onPress: () => this.props.navigation.pop() }
+            { text: "YES", onPress: () => BackHandler.exitApp() }
+            // { text: "YES", onPress: () => this.props.navigation.pop() }
         ]);
         return true;
     };
@@ -40,7 +40,7 @@ export default class ComingSoonScreen extends Component {
     {
         return(
             <View>
-                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} homeScreen = {true}/>
+                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {true}/>
                 
                 <ScrollView style = {{backgroundColor : '#fff', height : '100%'}}>
                     <View style = {{flex : 1}}>

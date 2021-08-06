@@ -17,7 +17,7 @@ export default class HealthHistoryScreen extends React.Component
         personalInfo_address : "", personalInfo_phoneNo : "", personalInfo_age : "", personalInfo_gender : "Male", personalInfo_height : "",
         dob : new Date(),
         weight_current : '', weight_sixMonthsAgo : '', weight_oneYearAgo : '', weight_differentWeightRequired : '', weight_intentLost : '', weight_relationshipStatus : 'Single', weight_childern : '', weight_occupation : '', weight_lineOfWork : '', weight_stressAtWork : '', weight_workHours : '', weight_domesticLife : '', weight_healthConcerns : '', weight_diagnosed : '', weight_medication : '', weight_supplements : '', weight_familyMemberProblem : '',
-        bloodInfo_bloodType : '', bloodInfo_takingBirthControlPills : '', bloodInfo_menstrualCycle : '',
+        bloodInfo_bloodType : 'A+', bloodInfo_takingBirthControlPills : '', bloodInfo_menstrualCycle : '',
         gutDiseaseInfo_constipationOrDiarrhoeaOrGasDetails : '', gutDiseaseInfo_constipationOrDiarrhoeaOrGasDuration : '',
         physicalInfo_foodAllergies : '', physicalInfo_physicallyActive : '', physicalInfo_dailyExercise : '', physicalInfo_exerciseDetails : '',
         foodDetails_breakToDinnerEatingRoutine : '',
@@ -153,7 +153,7 @@ export default class HealthHistoryScreen extends React.Component
                 <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_address : value})} value = {this.state.personalInfo_address}/>
 
                 <Text style = {styles.labelInputText}>Phone No:</Text>
-                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_phoneNo : value})} value = {this.state.personalInfo_phoneNo}/>
+                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_phoneNo : value})} value = {this.state.personalInfo_phoneNo} keyboardType="number-pad"/>
 
                 <Text style = {styles.labelInputText}>Age:</Text>
                 <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_age : value})} value = {this.state.personalInfo_age}/>
@@ -178,7 +178,7 @@ export default class HealthHistoryScreen extends React.Component
                     style={styles.datePicker}
                     date={this.state.dob}
                     mode="date"
-                    placeholder="select date"
+                    placeholder="Select date"
                     format="MM-DD-YYYY"
                     minDate="01-01-1900"
                     maxDate={this.getTodayDate()}
@@ -300,7 +300,7 @@ export default class HealthHistoryScreen extends React.Component
                 <Text style = {styles.labelInputText}>What is your blood type?</Text>
                 <View style={{ height : 40, borderWidth: 1, borderColor : 'black', justifyContent : 'center'}}>
                     <Picker
-                        value= {this.state.bloodInfo_bloodType}
+                        selectedValue = {this.state.bloodInfo_bloodType}
                         mode = 'dropdown'
                         onValueChange = {(value) => this.setState({bloodInfo_bloodType : value})}
                         style = {{height : 40}}>
@@ -545,7 +545,7 @@ export default class HealthHistoryScreen extends React.Component
     {
         return(
             <View>
-                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} homeScreen = {false}/>
+                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {false}/>
                 
                 <ScrollView style = {{backgroundColor : '#fff'}}>
                     <View style = {styles.container}>

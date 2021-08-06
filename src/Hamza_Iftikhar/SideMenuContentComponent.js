@@ -9,13 +9,16 @@ const themeColor = '#1f8e46';
 
 function DrawerHeader(props)
 {
+    const index = props.state.index;
+    const userName = props.state.routes[index].params.name;
+
     return(
         <Appbar.Header style = {{backgroundColor : themeColor, justifyContent : 'flex-start'}}>
             <Appbar.Action
                 icon="menu"
                 onPress={() => props.navigation.toggleDrawer()}/>
             <Avatar.Image source = {require('../Muhammad_Hamza/img/cal.jpg')} size = {30}/>
-            <Title style = {{fontSize : 15, fontWeight : 'bold', marginLeft : '5%', color : 'white'}}>FAIZAN RASOOL</Title>
+            <Title style = {{fontSize : 15, fontWeight : 'bold', marginLeft : '5%', color : 'white'}}>{userName}</Title>
         </Appbar.Header>
     );
 }

@@ -12,8 +12,8 @@ import AnimatedLoader from "react-native-animated-loader";
 
 export default class SignInScreen extends React.Component {
   state = {
-    username : 'hamza3@gmail.com',
-    password : '123456',
+    username : '',
+    password : '',
     visible: false,
   }
 
@@ -44,7 +44,7 @@ export default class SignInScreen extends React.Component {
 
             if(response.data["status"] === "okay")
             {
-              this.props.navigation.navigate('AfterLogIn', {themeColor : this.props.route.params.themeColor, token : response.data["response"]["jwt"], userId : response.data["user"]["id"], email : this.state.username})
+              this.props.navigation.navigate('AfterLogIn', {themeColor : this.props.route.params.themeColor, token : response.data["response"]["jwt"], userId : response.data["user"]["id"], email : this.state.username, name : response.data["user"]["name"]})
             }
         }).
         catch(error => {
@@ -81,7 +81,7 @@ export default class SignInScreen extends React.Component {
               <View style={STYLES.inputContainer}>
                 <Icon
                   name="mail-outline"
-                  color={COLORS.light}
+                  color={'black'}
                   size={20}
                   style={STYLES.inputIcon}
                 />
@@ -90,7 +90,7 @@ export default class SignInScreen extends React.Component {
               <View style={STYLES.inputContainer}>
                 <Icon
                   name="lock-outline"
-                  color={COLORS.light}
+                  color={'black'}
                   size={20}
                   style={STYLES.inputIcon}
                 />
