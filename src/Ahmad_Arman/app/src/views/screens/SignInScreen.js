@@ -6,7 +6,7 @@ import {SafeAreaView, View, Text, TextInput, Image, Alert, ToastAndroid, StyleSh
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/color'
 import STYLES from '../../styles/index';
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 import AnimatedLoader from "react-native-animated-loader";
 
@@ -24,6 +24,8 @@ export default class SignInScreen extends React.Component {
       Alert.alert('Username or password must not be empty');
     }else{
         this.setState({visible:true});
+        const errorMessage = '';
+
         const data = 
         { 
           'email':this.state.username,
@@ -34,9 +36,28 @@ export default class SignInScreen extends React.Component {
             'content-type':'application/json'
         };
 
+        // axios.defaults.transformResponse = function onResponseReceived(data)
+        // {
+        //   console.log(data.toJSON());
+        //   if(data.status === "okay")
+        //   {
+        //     console.log("Logged in");
+        //   }
+        //   else if(data.status === "error")
+        //   {
+        //     console.log("Error");
+        //   }
+        //   else if(data["status"] === "fail")
+        //   {
+        //     console.log("failed");
+        //   }
+        //   return data;
+        // }
+
         axios.post('https://thefoodpharmacy.general.greengrapez.com/api/auth/login', data, {headers}).
         then(response => {
             this.setState({visible:false});
+            
             if(response.data["status"] === "error")
             {
                 Alert.alert("Error", response.data["response"]);
@@ -48,7 +69,23 @@ export default class SignInScreen extends React.Component {
             }
         }).
         catch(error => {
-            Alert.alert("Error", error.message);
+            var errorMessage = '';
+            if(error.response)
+            {
+              if(error.response.data.status === 'fail')
+              {
+                if(error.response.data.response.message)
+                {
+                  errorMessage = error.response.data.response.message;
+                }
+                else
+                {
+                  errorMessage = "Incomplete Email";
+                }
+              }
+            }
+            console.log("Response : ", errorMessage);
+            Alert.alert("Log In Failed", errorMessage);
             this.setState({visible:false});
         });
     }

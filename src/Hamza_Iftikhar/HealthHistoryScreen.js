@@ -156,7 +156,7 @@ export default class HealthHistoryScreen extends React.Component
                 <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_phoneNo : value})} value = {this.state.personalInfo_phoneNo} keyboardType="number-pad"/>
 
                 <Text style = {styles.labelInputText}>Age:</Text>
-                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_age : value})} value = {this.state.personalInfo_age}/>
+                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_age : value})} value = {this.state.personalInfo_age} keyboardType="number-pad"/>
 
                 <Text style = {styles.labelInputText}>Gender:</Text>
                 <View style={{ height : 40, borderWidth: 1, borderColor : 'black', justifyContent : 'center'}}>
@@ -170,8 +170,8 @@ export default class HealthHistoryScreen extends React.Component
                     </Picker>
                 </View>
 
-                <Text style = {styles.labelInputText}>Height:</Text>
-                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_height : value})} value = {this.state.personalInfo_height}/>
+                <Text style = {styles.labelInputText}>Height(in ft):</Text>
+                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_height : value})} value = {this.state.personalInfo_height} keyboardType="number-pad"/>
 
                 <Text style = {styles.labelInputText}>DOB:</Text>
                 <DatePicker

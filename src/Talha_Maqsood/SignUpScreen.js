@@ -28,7 +28,14 @@ export default class SignUpScreen extends React.Component {
         };
     }
 
-    cities = ['Lahore', 'Karachi', 'Islamabad', 'Sialkot', 'Rawalpindi', 'Faisalabad'];
+    cities = [
+        {key : 0, value : 'Lahore'}, 
+        {key : 1, value : 'Karachi'}, 
+        {key : 2, value : 'Islamabad'}, 
+        {key : 3, value : 'Sialkot'}, 
+        {key : 4, value : 'Rawalpindi'}, 
+        {key : 5, value : 'Faisalabad'}
+    ]
 
     validation() {
         const { email, password, name, phone, city } = this.state;
@@ -188,7 +195,7 @@ export default class SignUpScreen extends React.Component {
                                 onValueChange = {(value) => this.setState({city : value})}
                                 style = {{height : 40}}>
                                     {this.cities.map(city => 
-                                      <Picker.Item label={city} value={city} />  
+                                      <Picker.Item label={city.value} value={city.value} />  
                                     )}
                             </Picker>
                         </View>
@@ -246,8 +253,9 @@ const styles = StyleSheet.create({
     inputView: {
         width: "80%",
         marginBottom: 20,
-        borderBottomWidth: 2,
+        borderWidth : 2,
         borderColor: '#696969',
+        backgroundColor : 'white',
         alignSelf: "center",
         flexDirection: 'row',
     },
