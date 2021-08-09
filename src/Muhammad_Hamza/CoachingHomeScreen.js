@@ -23,7 +23,6 @@ import axios from "axios";
 export default class CoachingHomeScreen extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       show : false,
       visible : false,
@@ -76,10 +75,6 @@ export default class CoachingHomeScreen extends Component {
         {
           this.setState({pending : false, approved : false, applied : false});
         }
-        else if(response.data['response']['Status'] == '0')
-        {
-          this.setState({pending : false, approved : false, applied : false});
-        }
         // this.setState({pending : false, approved : false, applied : false});
         // this.setState({approved : true});
         this.setState({visible:false});
@@ -96,8 +91,11 @@ export default class CoachingHomeScreen extends Component {
 
   componentDidMount() {
 
+    let myInterval;
+
     this.unsubscribeFocus  = this.props.navigation.addListener('focus', () => {
       this.fetchDataFromAPI();
+      myInterval = setInterval(() => this.fetchDataFromAPI(), 1000 * 60 * 10);
       this.backHandler = BackHandler.addEventListener(
         "hardwareBackPress",
         this.backAction
@@ -105,6 +103,7 @@ export default class CoachingHomeScreen extends Component {
      });
 
     this.unsubscribeBlur = this.props.navigation.addListener('blur', () => {
+      clearInterval(myInterval);
       BackHandler.removeEventListener("hardwareBackPress", this.backAction);
     });
   }
@@ -127,6 +126,25 @@ export default class CoachingHomeScreen extends Component {
   goToSelectScreen()
   {
     this.props.navigation.navigate('Select', {themeColor : this.props.route.params.themeColor, token : this.props.route.params.token, userId : this.props.route.params.userId})
+  }
+  
+  isCreateDisabled()
+  {
+    if(!this.state.approved)
+    {
+      return this.state.applied;
+    }
+    else
+    {
+      if(this.state.remainingCalenderlyMeetings > 0)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
   }
 
   render() {
@@ -168,7 +186,7 @@ export default class CoachingHomeScreen extends Component {
                       Coaching:
                     </Text>
 
-                    <TouchableOpacity style={[{backgroundColor : (!this.state.applied || (this.state.approved && this.state.remainingCalenderlyMeetings <= 0)) ? this.props.route.params.themeColor : 'grey'}, styles.button]} onPress={() => this.goToSelectScreen()} disabled = {!this.state.approved ? this.state.applied : this.state.calendly_status > 0}>
+                    <TouchableOpacity style={[{backgroundColor : (!this.state.applied || (this.state.approved && this.state.remainingCalenderlyMeetings <= 0)) ? this.props.route.params.themeColor : 'grey'}, styles.button]} onPress={() => this.goToSelectScreen()} disabled = {this.isCreateDisabled()}>
                       <Text style={{color: 'lightgrey'}}>Create +</Text>
                     </TouchableOpacity>
                   </View>

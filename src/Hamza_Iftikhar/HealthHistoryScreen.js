@@ -153,10 +153,10 @@ export default class HealthHistoryScreen extends React.Component
                 <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_address : value})} value = {this.state.personalInfo_address}/>
 
                 <Text style = {styles.labelInputText}>Phone No:</Text>
-                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_phoneNo : value})} value = {this.state.personalInfo_phoneNo} keyboardType="number-pad"/>
+                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_phoneNo : value})} value = {this.state.personalInfo_phoneNo} keyboardType="numeric"/>
 
                 <Text style = {styles.labelInputText}>Age:</Text>
-                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_age : value})} value = {this.state.personalInfo_age} keyboardType="number-pad"/>
+                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_age : value})} value = {this.state.personalInfo_age} keyboardType="numeric"/>
 
                 <Text style = {styles.labelInputText}>Gender:</Text>
                 <View style={{ height : 40, borderWidth: 1, borderColor : 'black', justifyContent : 'center'}}>
@@ -171,7 +171,7 @@ export default class HealthHistoryScreen extends React.Component
                 </View>
 
                 <Text style = {styles.labelInputText}>Height(in ft):</Text>
-                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_height : value})} value = {this.state.personalInfo_height} keyboardType="number-pad"/>
+                <TextInput style = {styles.textInputSimple} placeholder = '' onChangeText = {(value) => this.setState({personalInfo_height : value})} value = {this.state.personalInfo_height} keyboardType="numeric"/>
 
                 <Text style = {styles.labelInputText}>DOB:</Text>
                 <DatePicker

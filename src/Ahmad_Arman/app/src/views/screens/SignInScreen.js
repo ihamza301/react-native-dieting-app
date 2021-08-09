@@ -36,24 +36,6 @@ export default class SignInScreen extends React.Component {
             'content-type':'application/json'
         };
 
-        // axios.defaults.transformResponse = function onResponseReceived(data)
-        // {
-        //   console.log(data.toJSON());
-        //   if(data.status === "okay")
-        //   {
-        //     console.log("Logged in");
-        //   }
-        //   else if(data.status === "error")
-        //   {
-        //     console.log("Error");
-        //   }
-        //   else if(data["status"] === "fail")
-        //   {
-        //     console.log("failed");
-        //   }
-        //   return data;
-        // }
-
         axios.post('https://thefoodpharmacy.general.greengrapez.com/api/auth/login', data, {headers}).
         then(response => {
             this.setState({visible:false});
@@ -122,7 +104,7 @@ export default class SignInScreen extends React.Component {
                   size={20}
                   style={STYLES.inputIcon}
                 />
-                <TextInput placeholder="Username*" style={STYLES.input} value = {this.state.username} onChangeText = {(value) => this.setState({username : value})}/>
+                <TextInput placeholder="Username*" style={STYLES.input} value = {this.state.username} onChangeText = {(value) => this.setState({username : value})} keyboardType="email-address"/>
               </View>
               <View style={STYLES.inputContainer}>
                 <Icon

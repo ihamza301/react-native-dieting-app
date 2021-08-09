@@ -28,14 +28,7 @@ export default class SignUpScreen extends React.Component {
         };
     }
 
-    cities = [
-        {key : 0, value : 'Lahore'}, 
-        {key : 1, value : 'Karachi'}, 
-        {key : 2, value : 'Islamabad'}, 
-        {key : 3, value : 'Sialkot'}, 
-        {key : 4, value : 'Rawalpindi'}, 
-        {key : 5, value : 'Faisalabad'}
-    ]
+    cities = ['Lahore', 'Karachi', 'Islamabad', 'Sialkot', 'Rawalpindi', 'Faisalabad']
 
     validation() {
         const { email, password, name, phone, city } = this.state;
@@ -114,9 +107,11 @@ export default class SignUpScreen extends React.Component {
                     "Access-Control-Allow-Origin": "*",
                 },
             }).then((response) => {
-                Alert.alert("Sign Up Successful", "Go Back and log in now.", [{text : "Log In", onPress : () => this.logInNow(), style : 'default'}]);
+                //Alert.alert("Sign Up Successful", "Go Back and log in now.", [{text : "Log In", onPress : () => this.logInNow(), style : 'default'}]);
                 this.setState({visible:false});
+                this.logInNow();
             }).catch((err) => {
+                console.log(err.response.data);
                 Alert.alert("Error", err.response.data.response.message);
                 this.setState({visible:false});
             });
@@ -180,7 +175,7 @@ export default class SignUpScreen extends React.Component {
                             placeholder="Phone No *"
                             placeholderTextColor="#000"
                             color="#000"
-                            keyboardType="number-pad"
+                            keyboardType="numeric"
                             value={this.state.phone}
                             onChangeText={(text) => { this.setState({ phone: text }) }}
                         />
@@ -195,7 +190,7 @@ export default class SignUpScreen extends React.Component {
                                 onValueChange = {(value) => this.setState({city : value})}
                                 style = {{height : 40}}>
                                     {this.cities.map(city => 
-                                      <Picker.Item label={city.value} value={city.value} />  
+                                      <Picker.Item label={city} value={city} />  
                                     )}
                             </Picker>
                         </View>
