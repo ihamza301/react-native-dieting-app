@@ -241,7 +241,7 @@ export default class DietPlanScreen extends React.Component {
               <View style={{flex:1}}>
                 <Text style={{
                   fontSize: 20,
-                  marginLeft:15,
+                  marginHorizontal:15,
                   color:'green',
                 }}>View Diet Plan:</Text>
               </View>
@@ -249,20 +249,21 @@ export default class DietPlanScreen extends React.Component {
               <View style={{flex:3}}>
                 <Text style={{
                   fontSize: 16,
-                  marginLeft:15,
+                  marginHorizontal:15,
                   color:'black',
                 }}>Meal Plan</Text>
 
                 <Text style={{
                   fontSize: 13,
-                  marginLeft:15,
+                  marginHorizontal:15,
                   color:'black',
                 }}>22/6/2021</Text>
 
                 <Text style={{
                   fontSize: 12,
-                  marginLeft:15,
+                  marginHorizontal:15,
                   color:'black',
+                  textAlign : 'justify'
                 }}>A healthy eating plan: Emphasizes vegetables, fruits, whole grains, and fat-free or low-fat dairy oroducts. Includes lean meats, poultry, fish, beans, eggs, and nuts. Limits saturated and trans fats, sodium, and added sugars 
                 </Text>
               </View>
@@ -277,7 +278,7 @@ export default class DietPlanScreen extends React.Component {
                     alignItems:'flex-start',
                     justifyContent:'flex-end',
                   }}>
-                    <View style={{flex:2, alignSelf:'center', justifyContent: 'center' }}>
+                    <View style={{flex:2, alignSelf:'center', justifyContent: 'center', alignItems : 'center' }}>
                       <Text style={{
                         textAlign:'center',
                         color:'green',
@@ -288,13 +289,13 @@ export default class DietPlanScreen extends React.Component {
                     {
                       item.dataArray.map(foodItem => 
                         <View style={{flex:4}}>
-                          <Text style={{ color:'black', marginLeft:15, fontSize:16, alignSelf : 'flex-start', fontWeight : 'bold'}}>
+                          <Text style={{ color:'black', marginLeft:10, marginRight : 10, fontSize:16, alignSelf : 'flex-start', fontWeight : 'bold'}}>
                             Item : {foodItem.item}
                           </Text>
-                          <Text style={{ color:'black', marginLeft:15, fontSize:14, alignSelf : 'flex-start', textAlign : 'justify'}}>
+                          <Text style={{ color:'black', marginLeft:10, marginRight : 10, fontSize:14, alignSelf : 'flex-start', textAlign : 'justify'}}>
                             Recipe : {foodItem.reciepe}
                           </Text>
-                          <Text style={{ color:'black', marginLeft:15, fontSize:14, alignSelf : 'flex-start', textAlign : 'justify'}}>
+                          <Text style={{ color:'black', marginLeft:10, marginRight : 10, fontSize:14, alignSelf : 'flex-start', textAlign : 'justify'}}>
                             Grocery : {foodItem.grocery}
                           </Text>
                         </View>
@@ -307,7 +308,7 @@ export default class DietPlanScreen extends React.Component {
               renderSectionHeader={({section}) =>
                 <View style={{height:40,backgroundColor:'white',justifyContent:'center'}}>
                   <Divider style = {{backgroundColor : 'black', height : 3, marginTop : 20, marginBottom : 10}}/>
-                  <Text style={{color:'green',textAlign:'left', marginLeft:15, fontSize:20, }}>
+                  <Text style={{color:'green',textAlign:'left', marginHorizontal:15, fontSize:20, }}>
                   {section.title}
                   </Text>
                 </View>
