@@ -37,6 +37,10 @@ export default class PaymentScreen extends React.Component {
         if(this.state.name.length == 0){
             Alert.alert('Name must not be empty');
         }
+        else if(this.state.imageName.length == 0 || this.state.imageUri.length == 0)
+        {
+            Alert.alert('Must select an image');
+        }
         else
         {
             if(this.state.selectedValue == '')

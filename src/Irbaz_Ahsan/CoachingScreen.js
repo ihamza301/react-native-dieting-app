@@ -46,13 +46,13 @@ export default class CoachingScreen extends React.Component {
                   <ImageBackground style = {styles.backgroundImage} source={require('./assets/First.png')} resizeMode="cover">
                     <View style = {{height : width * 0.3, marginTop : width * 0.35 * 0.5, marginHorizontal : 10}}>
                       <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/session </Text>
-                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 5000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 5,000 </Text>
 
                       <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/4 session </Text>
-                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 20000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 20,000 </Text>
 
                       <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/5 session </Text>
-                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 25000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 25,000 </Text>
 
                       <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Duration </Text>
                       <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 60 Minutes </Text>
@@ -74,13 +74,13 @@ export default class CoachingScreen extends React.Component {
                   <ImageBackground style = {styles.backgroundImage} source={require('./assets/First.png')} resizeMode="cover">
                   <View style = {{height : width * 0.3, marginTop : width * 0.35 * 0.5, marginHorizontal : 10}}>
                       <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/session </Text>
-                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 5000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 5,000 </Text>
 
                       <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/4 session </Text>
-                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 20000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 20,000 </Text>
 
                       <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Price/5 session </Text>
-                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 25000 </Text>
+                      <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 25,000 </Text>
 
                       <Text style = {[styles.labelText, {textAlign : 'left'}]} adjustsFontSizeToFit numberOfLines={1}> Duration </Text>
                       <Text style = {[styles.labelText, {textAlign : 'right'}]} adjustsFontSizeToFit numberOfLines={1}> 60 Minutes </Text>

@@ -60,7 +60,7 @@ export default class CoachingHomeScreen extends Component {
     axios.get('https://thefoodpharmacy.general.greengrapez.com/api/auth/status/' + this.props.route.params.userId, {headers}).
     then(response => {
       if(response.data["status"] === "okay"){
-        console.log('Data is =',response.data["response"]["Status"]);
+        console.log('Coaching Home Screen Data is =',response.data["response"]["Status"]);
         if(response.data['response']['Status'] == 'pending')
         {
           this.setState({pending : true, approved : false, applied : true});
@@ -95,7 +95,7 @@ export default class CoachingHomeScreen extends Component {
 
     this.unsubscribeFocus  = this.props.navigation.addListener('focus', () => {
       this.fetchDataFromAPI();
-      myInterval = setInterval(() => this.fetchDataFromAPI(), 1000 * 60 * 10);
+      myInterval = setInterval(() => this.fetchDataFromAPI(), 1000 * 60 * 5);
       this.backHandler = BackHandler.addEventListener(
         "hardwareBackPress",
         this.backAction
@@ -147,6 +147,36 @@ export default class CoachingHomeScreen extends Component {
     }
   }
 
+  isHealthHistoryDisabled()
+  {
+    if(!this.state.approved || this.state.remainingPaymentSessions <= 0)
+    {
+      return true;
+    }
+
+    return false;
+  }
+
+  isDietPlanDisabled()
+  {
+    if(!this.state.approved)
+    {
+      return true;
+    }
+
+    return false;
+  }
+
+  isScheduleMeetingDisabled()
+  {
+    if(!this.state.approved || this.state.remainingCalenderlyMeetings <= 0 || this.state.remainingCalenderlyMeetings <= this.state.remainingPaymentSessions)
+    {
+      return true;
+    }
+
+    return false;
+  }
+
   render() {
     return (
       <View style={{flex:1}}>
@@ -186,17 +216,50 @@ export default class CoachingHomeScreen extends Component {
                       Coaching:
                     </Text>
 
-                    <TouchableOpacity style={[{backgroundColor : (!this.state.applied || (this.state.approved && this.state.remainingCalenderlyMeetings <= 0)) ? this.props.route.params.themeColor : 'grey'}, styles.button]} onPress={() => this.goToSelectScreen()} disabled = {this.isCreateDisabled()}>
-                      <Text style={{color: 'lightgrey'}}>Create +</Text>
+                    <TouchableOpacity style={[{backgroundColor : (!this.state.applied || (this.state.approved && this.state.remainingCalenderlyMeetings <= 0)) ? this.props.route.params.themeColor : 'grey'}, styles.createPaymentButton]} onPress={() => this.goToSelectScreen()} disabled = {this.isCreateDisabled()}>
+                      <Text style={{color: 'lightgrey'}}>Create Payment</Text>
                     </TouchableOpacity>
                   </View>
+
+                  {/* Health history Image and button */}
+                  
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignContent : 'center', marginVertical : 30}}>
+                    
+                    <Image
+                      style={styles.tinyLogo}
+                      source={require('./img/helpp.png')}
+                    />
+
+                    <TouchableOpacity
+                      disabled = {this.isHealthHistoryDisabled()}
+                      style={[!this.isHealthHistoryDisabled() ? {borderColor : this.props.route.params.themeColor, backgroundColor : this.props.route.params.themeColor} : {borderColor : 'grey', backgroundColor : 'grey'}, styles.scheduleBtn]}
+                      onPress={() => this.goToHealthHistory()}>
+                      <Text style={styles.buttontext}>HEALTH HISTORY</Text>
+                    </TouchableOpacity>
+
+                  </View>
+                  {/* Diet plan image and button */}
+                
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignContent : 'center', marginVertical : 30}}>
+
+                    <Image style={styles.tinyLogo} source={require('./img/diet.png')} />
+
+                    <TouchableOpacity
+                      disabled = {this.isDietPlanDisabled()}
+                      style={[!this.isDietPlanDisabled() ? {borderColor : this.props.route.params.themeColor, backgroundColor : this.props.route.params.themeColor} : {borderColor : 'grey', backgroundColor : 'grey'}, styles.scheduleBtn]}
+                      onPress={() => this.goToDietPlan()}>
+                      <Text style={styles.buttontext}>DIET PLAN</Text>
+                    </TouchableOpacity>
+
+                  </View>
+
                   {/* Calendar Image and button */}
                   
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', alignContent : 'center', marginVertical : 30}}>
                     <Image style={styles.tinyLogo} source={require('./img/calendar.png')}/>
                     <TouchableOpacity
-                      disabled = {!this.state.approved || this.state.remainingCalenderlyMeetings <= 0}
-                      style={[{borderColor : (this.state.approved && this.state.remainingCalenderlyMeetings > 0) ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
+                      disabled = {this.isScheduleMeetingDisabled()}
+                      style={[!this.isScheduleMeetingDisabled() ? {borderColor : this.props.route.params.themeColor, backgroundColor : this.props.route.params.themeColor} : {borderColor : 'grey', backgroundColor : 'grey'}, styles.scheduleBtn]}
                       onPress={() => {
                         this.setState({show: true});
                       }}>
@@ -233,37 +296,7 @@ export default class CoachingHomeScreen extends Component {
                     </Modal>
                   </View>
 
-                  {/* Health history Image and button */}
                   
-                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignContent : 'center', marginVertical : 30}}>
-                    
-                    <Image
-                      style={styles.tinyLogo}
-                      source={require('./img/helpp.png')}
-                    />
-
-                    <TouchableOpacity
-                      disabled = {!this.state.approved}
-                      style={[{borderColor : (this.state.approved) ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
-                      onPress={() => this.goToHealthHistory()}>
-                      <Text style={styles.buttontext}>HEALTH HISTORY</Text>
-                    </TouchableOpacity>
-
-                  </View>
-                  {/* Diet plan image and button */}
-                
-                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignContent : 'center', marginVertical : 30}}>
-
-                    <Image style={styles.tinyLogo} source={require('./img/diet.png')} />
-
-                    <TouchableOpacity
-                      disabled = {!this.state.approved}
-                      style={[{borderColor : this.state.approved ? this.props.route.params.themeColor : 'grey'}, styles.scheduleBtn]}
-                      onPress={() => this.goToDietPlan()}>
-                      <Text style={styles.buttontext}>DIET PLAN</Text>
-                    </TouchableOpacity>
-
-                  </View>
                 </View>
               </View>
             </ScrollView>
@@ -279,6 +312,16 @@ const styles = StyleSheet.create({
   textTop: {
     fontSize: 16,
     textAlign : 'center'
+  },
+  createPaymentButton:
+  {
+    width: '40%',
+    height: 30,
+    borderRadius: 6,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor : 'lightgray',
+    justifyContent : 'center'
   },
   button: {
     width: '25%',
@@ -300,6 +343,7 @@ const styles = StyleSheet.create({
   },
   buttontext:{
     fontSize:12,
+    color : 'lightgrey'
   },
   tinyLogo: {
     tintColor: '#1f8e46',

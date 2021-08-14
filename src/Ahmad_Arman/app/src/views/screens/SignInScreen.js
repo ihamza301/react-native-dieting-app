@@ -104,7 +104,7 @@ export default class SignInScreen extends React.Component {
                   size={20}
                   style={STYLES.inputIcon}
                 />
-                <TextInput placeholder="Username*" style={STYLES.input} value = {this.state.username} onChangeText = {(value) => this.setState({username : value})} keyboardType="email-address"/>
+                <TextInput placeholder="Username*" style={STYLES.input} value = {this.state.username} onChangeText = {(value) => this.setState({username : value})}/>
               </View>
               <View style={STYLES.inputContainer}>
                 <Icon

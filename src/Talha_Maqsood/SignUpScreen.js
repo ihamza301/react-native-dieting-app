@@ -149,7 +149,6 @@ export default class SignUpScreen extends React.Component {
                             placeholder="Email *"
                             placeholderTextColor="#000"
                             color="#000"
-                            keyboardType="email-address"
                             value={this.state.email}
                             onChangeText={(text) => { this.setState({ email: text }) }}
                         />
@@ -175,7 +174,7 @@ export default class SignUpScreen extends React.Component {
                             placeholder="Phone No *"
                             placeholderTextColor="#000"
                             color="#000"
-                            keyboardType="numeric"
+                            keyboardType="decimal-pad"
                             value={this.state.phone}
                             onChangeText={(text) => { this.setState({ phone: text }) }}
                         />

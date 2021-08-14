@@ -292,7 +292,7 @@ export default class DietPlanScreen extends React.Component {
                             Item : {foodItem.item}
                           </Text>
                           <Text style={{ color:'black', marginLeft:15, fontSize:14, alignSelf : 'flex-start', textAlign : 'justify'}}>
-                            Reciepe : {foodItem.reciepe}
+                            Recipe : {foodItem.reciepe}
                           </Text>
                           <Text style={{ color:'black', marginLeft:15, fontSize:14, alignSelf : 'flex-start', textAlign : 'justify'}}>
                             Grocery : {foodItem.grocery}
