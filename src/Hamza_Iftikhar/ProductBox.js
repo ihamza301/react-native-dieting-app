@@ -13,12 +13,43 @@ export default class MyText extends React.Component
 {
     render()
     {
+        let imageUrl = '';
+        if(this.props.item.thumbnail.length === 0)
+        {
+            if(this.props.item.thumbnail2.length === 0)
+            {
+                if(this.props.item.thumbnail3.length === 0)
+                {
+                    if(this.props.item.thumbnail4.length === 0)
+                    {
+                        imageUrl = require('./Images/image_pro_5.png');
+                    }
+                    else
+                    {
+                        imageUrl = this.props.item.thumbnail4;
+                    }
+                }
+                else
+                {
+                    imageUrl = this.props.item.thumbnail3;
+                }
+            }
+            else
+            {
+                imageUrl = this.props.item.thumbnail2;
+            }
+        }
+        else
+        {
+            imageUrl = this.props.item.thumbnail;
+        }
+
         return (
-            <TouchableOpacity style = {[styles.container, styles.boxWithShadow]} onPress = {() => Alert.alert(this.props.item.title, "$" + this.props.item.price)}>
+            <TouchableOpacity style = {[styles.container, styles.boxWithShadow]} onPress = {() => Alert.alert(this.props.item.name, "$" + this.props.item.price)}>
                 <View style = {styles.innerContainer}>
-                    <Image style={styles.image} source={this.props.item.url} />
-                    <Text>
-                        {this.props.item.title}
+                    <Image style={styles.image} source={{uri : imageUrl}} resizeMethod = {'auto'} resizeMode = {'cover'}/>
+                    <Text style = {{marginTop : 5}}>
+                        {this.props.item.name}
                     </Text>
                     <Text style = {[styles.text, {color : this.props.themeColor}]}>
                         ${this.props.item.price}
@@ -39,7 +70,6 @@ const styles = StyleSheet.create(
             backgroundColor : "#fff",
             margin : 10,
             paddingBottom : 50,
-            alignItems : 'center',
             justifyContent : 'center',
   
         },
@@ -47,7 +77,6 @@ const styles = StyleSheet.create(
         {
             flex : 1,
             flexDirection : 'column',
-            justifyContent : 'center',
             alignItems : 'center'
         },
         boxWithShadow: {
@@ -65,8 +94,8 @@ const styles = StyleSheet.create(
         image: {
             flex : 1,
             borderRadius: 4,
-            margin : 10,
-            resizeMode: 'center'
+            margin : 15,
+            height : 150, width : 150,
         }
     }
 );
