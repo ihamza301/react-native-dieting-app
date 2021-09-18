@@ -8,34 +8,24 @@ import {
     StyleSheet
 } from 'react-native';
 
-import { Searchbar } from 'react-native-paper';
-
-import MyHeader from '../MyHeader.js'
-
-import ProductBox from '../ProductBox.js'
-
 import AnimatedLoader from "react-native-animated-loader";
 
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-export default class ProductScreen extends React.Component
+import MyHeader from '../MyHeader.js'
+
+export default class RecommendationMenuCategory extends React.Component
 {   
-
-  constructor(props)
+    constructor(props)
     {
         super(props);
 
         this.state = {
             visible : false,
             dataFound : false,
-            searchQuery : '',
-            products : []
+            categories : []
         };
-    }
-
-    onChangeSearch = (query) =>
-    {
-        this.setState({searchQuery : query})
     }
 
     fetchDataFromAPI()
@@ -48,12 +38,12 @@ export default class ProductScreen extends React.Component
             'content-type':'application/json'
         };
 
-        axios.get('https://thefoodpharmacy.general.greengrapez.com/api/auth/search/product/by/' + this.props.route.params.subCategory, {headers}).
+        axios.get('https://thefoodpharmacy.general.greengrapez.com/api/auth/recommendation/category', {headers}).
         then(response => {
-            if(response.data["status"] === "okay"){
+            if(response.data["status"] === "successful"){
                 if(response.data['response']['message'] == 'successful')
                 {
-                    this.setState({products : response.data['response']['Products']});
+                    this.setState({categories : response.data['response']['Categories']});
                     this.setState({dataFound : true});
                 }
                 else if(response.data['response']['message'] == 'unSuccessful')
@@ -88,12 +78,17 @@ export default class ProductScreen extends React.Component
     render()
     {
         const renderItem = ({ item }) => (
-            <ProductBox item={item} themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation}/>
+            <View>
+                <TouchableOpacity style = {{flexDirection : 'row', marginVertical : '5%'}} onPress = {() => this.props.navigation.navigate('Recommendation-Screen', {category : item.category})}>
+                    <Icon style = {{marginHorizontal : '5%',marginTop : 5}} name="circle" size={14} color={this.props.route.params.themeColor} />
+                    <Text style = {{fontSize : 18}}>{item.category}</Text>
+                </TouchableOpacity>
+            </View>
         );
 
         return(
-          <View style = {{flex : 1}}>
-                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {true}/>
+            <View style = {{flex : 1, backgroundColor : 'white'}}>
+                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {false}/>
 
                 {this.state.visible?(
                     <AnimatedLoader
@@ -109,17 +104,18 @@ export default class ProductScreen extends React.Component
                 }
 
                 {this.state.dataFound ? (
-                    <FlatList
-                    style = {{margin : 10, backgroundColor : "#fff"}}
-                    data={this.state.products}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    numColumns = {2}
-                    ListHeaderComponent = {<FlatListHeader themeColor = {this.props.route.params.themeColor} onChangeSearch = {this.onChangeSearch} searchQuery = {this.state.searchQuery}/>}
-                />
+                    <View style = {{backgroundColor : 'white'}}>
+                        <Text style = {{fontWeight : 'bold', fontSize : 36, backgroundColor : 'white', color : this.props.route.params.themeColor, marginHorizontal : '5%', marginTop : '5%'}}>Categories</Text>
+                        <FlatList
+                            style = {{margin : 0, backgroundColor : "#fff"}}
+                            data={this.state.categories}
+                            renderItem={renderItem}
+                            keyExtractor={item => item.id}
+                        />
+                    </View>
                 ) : (
                     <View>
-                        <Text style = {{fontWeight : 'bold', fontSize : 20, alignSelf : 'center', textAlign : 'center', marginTop : '50%'}}>No products found.</Text>
+                        <Text style = {{fontWeight : 'bold', fontSize : 20, alignSelf : 'center', textAlign : 'center', marginTop : '50%'}}>No categories found.</Text>
                     </View>
                 )}
             </View>
@@ -127,30 +123,10 @@ export default class ProductScreen extends React.Component
     }
 }
 
-class FlatListHeader extends React.Component
-{
-    render()
-    {
-        return(
-            <View>
-                <Searchbar
-                    placeholder = "Product Name"
-                    iconColor = {this.props.themeColor}
-                    style = {{marginHorizontal : 20, marginVertical : 10, padding : 1}}
-                    onChangeText={this.props.onChangeSearch}
-                    value={this.props.searchQuery}
-                    />
-                <Text style = {{marginHorizontal : 30, marginVertical : 10, color : this.props.themeColor, fontSize : 15}}>
-                    Product
-                </Text>
-            </View>
-        );
-    }
-}
 
 const styles = StyleSheet.create({
-  lottie: {
-      width: 100,
-      height: 100
-  },
+    lottie: {
+        width: 100,
+        height: 100
+    },
 });

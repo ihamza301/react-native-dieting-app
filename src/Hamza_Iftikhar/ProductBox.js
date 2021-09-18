@@ -9,7 +9,7 @@ import {
     Alert
 } from 'react-native';
 
-export default class MyText extends React.Component
+export default class ProductBox extends React.Component
 {
     render()
     {
@@ -22,7 +22,7 @@ export default class MyText extends React.Component
                 {
                     if(this.props.item.thumbnail4.length === 0)
                     {
-                        imageUrl = require('./Images/image_pro_5.png');
+                        imageUrl = 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80';
                     }
                     else
                     {
@@ -45,7 +45,7 @@ export default class MyText extends React.Component
         }
 
         return (
-            <TouchableOpacity style = {[styles.container, styles.boxWithShadow]} onPress = {() => Alert.alert(this.props.item.name, "$" + this.props.item.price)}>
+            <TouchableOpacity style = {[styles.container, styles.boxWithShadow]} onPress = {() => this.props.navigation.navigate('Product-Detail-Screen', {item : this.props.item})}>
                 <View style = {styles.innerContainer}>
                     <Image style={styles.image} source={{uri : imageUrl}} resizeMethod = {'auto'} resizeMode = {'cover'}/>
                     <Text style = {{marginTop : 5}}>

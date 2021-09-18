@@ -8,17 +8,15 @@ import {
     StyleSheet
 } from 'react-native';
 
-import { Searchbar } from 'react-native-paper';
-
 import MyHeader from '../MyHeader.js'
 
-import ProductBox from '../ProductBox.js'
+import RecommendationBox from './RecommendationBox.js';
 
 import AnimatedLoader from "react-native-animated-loader";
 
 import axios from 'axios';
 
-export default class ProductScreen extends React.Component
+export default class RecommendationScreen extends React.Component
 {   
 
   constructor(props)
@@ -28,14 +26,8 @@ export default class ProductScreen extends React.Component
         this.state = {
             visible : false,
             dataFound : false,
-            searchQuery : '',
-            products : []
+            recommendations : []
         };
-    }
-
-    onChangeSearch = (query) =>
-    {
-        this.setState({searchQuery : query})
     }
 
     fetchDataFromAPI()
@@ -48,12 +40,12 @@ export default class ProductScreen extends React.Component
             'content-type':'application/json'
         };
 
-        axios.get('https://thefoodpharmacy.general.greengrapez.com/api/auth/search/product/by/' + this.props.route.params.subCategory, {headers}).
+        axios.get('https://thefoodpharmacy.general.greengrapez.com/api/auth/recommendation/' + this.props.route.params.category, {headers}).
         then(response => {
-            if(response.data["status"] === "okay"){
+            if(response.data["status"] === "successful"){
                 if(response.data['response']['message'] == 'successful')
                 {
-                    this.setState({products : response.data['response']['Products']});
+                    this.setState({recommendations : response.data['response']['recommendation']});
                     this.setState({dataFound : true});
                 }
                 else if(response.data['response']['message'] == 'unSuccessful')
@@ -88,11 +80,11 @@ export default class ProductScreen extends React.Component
     render()
     {
         const renderItem = ({ item }) => (
-            <ProductBox item={item} themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation}/>
+            <RecommendationBox item={item} themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation}/>
         );
 
         return(
-          <View style = {{flex : 1}}>
+          <View style = {{flex : 1, backgroundColor : 'white'}}>
                 <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {true}/>
 
                 {this.state.visible?(
@@ -111,15 +103,14 @@ export default class ProductScreen extends React.Component
                 {this.state.dataFound ? (
                     <FlatList
                     style = {{margin : 10, backgroundColor : "#fff"}}
-                    data={this.state.products}
+                    data={this.state.recommendations}
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
-                    numColumns = {2}
-                    ListHeaderComponent = {<FlatListHeader themeColor = {this.props.route.params.themeColor} onChangeSearch = {this.onChangeSearch} searchQuery = {this.state.searchQuery}/>}
+                    ListHeaderComponent = {<FlatListHeader themeColor = {this.props.route.params.themeColor}/>}
                 />
                 ) : (
                     <View>
-                        <Text style = {{fontWeight : 'bold', fontSize : 20, alignSelf : 'center', textAlign : 'center', marginTop : '50%'}}>No products found.</Text>
+                        <Text style = {{fontWeight : 'bold', fontSize : 20, alignSelf : 'center', textAlign : 'center', marginTop : '50%'}}>No recommendations found.</Text>
                     </View>
                 )}
             </View>
@@ -133,15 +124,8 @@ class FlatListHeader extends React.Component
     {
         return(
             <View>
-                <Searchbar
-                    placeholder = "Product Name"
-                    iconColor = {this.props.themeColor}
-                    style = {{marginHorizontal : 20, marginVertical : 10, padding : 1}}
-                    onChangeText={this.props.onChangeSearch}
-                    value={this.props.searchQuery}
-                    />
-                <Text style = {{marginHorizontal : 30, marginVertical : 10, color : this.props.themeColor, fontSize : 15}}>
-                    Product
+                <Text style = {{marginHorizontal : '5%', marginVertical : 10, color : this.props.themeColor, fontSize : 15}}>
+                    TFP Recommendation
                 </Text>
             </View>
         );

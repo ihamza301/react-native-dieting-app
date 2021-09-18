@@ -12,8 +12,8 @@ import AnimatedLoader from "react-native-animated-loader";
 
 export default class SignInScreen extends React.Component {
   state = {
-    username : '',
-    password : '',
+    username : 'well@gmail.com',
+    password : '12341234',
     visible: false,
   }
 
