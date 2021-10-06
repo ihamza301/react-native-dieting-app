@@ -83,10 +83,10 @@ const styles = StyleSheet.create(
         {
             flex : 0.5,
             flexDirection : 'row',
-            height : 500,
+            //height : 500,
             backgroundColor : "#fff",
             margin : 10,
-            paddingBottom : 50,
+            paddingBottom : 10,
             justifyContent : 'center',
   
         },
