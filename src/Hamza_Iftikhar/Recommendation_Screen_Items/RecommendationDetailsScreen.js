@@ -53,91 +53,92 @@ export default class RecommendationDetailsScreen extends React.Component
         }
 
         return(
-            <ScrollView style = {{backgroundColor : 'lightgrey'}} showsVerticalScrollIndicator = {false}>
-                <View style = {{flex : 1, backgroundColor : 'lightgrey', marginBottom : 20}}>
-                    <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {true}/>
-
-                    <View>
-                        <Text style = {{marginHorizontal : '5%', marginVertical : 10, color : this.props.route.params.themeColor, fontSize : 15}}>
-                            TFP Recommendation
-                        </Text>
-                    </View>
-
-                    <View style = {{flex : 1, alignItems : 'center', flexDirection : 'column'}}>
-                        <Text style = {{color : this.props.route.params.themeColor, fontSize : 26, fontWeight : 'bold'}}>{this.props.route.params.item.recom_name}</Text>
-                        <View style = {{height : 300, width : 350, marginVertical : 30}}>
-                            <Image style={{flex : 1}} source={{uri : imageUrl}} resizeMethod = {'auto'} resizeMode = {'cover'}/>
+            <View style = {{flex : 1, backgroundColor : 'lightgrey'}}>
+                <MyHeader themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} token = {this.props.route.params.token} homeScreen = {true}/>
+                <ScrollView style = {{backgroundColor : 'lightgrey'}} showsVerticalScrollIndicator = {false}>
+                    <View style = {{flex : 1, backgroundColor : 'lightgrey', marginBottom : 20}}>
+                        <View>
+                            <Text style = {{marginHorizontal : '5%', marginVertical : 10, color : this.props.route.params.themeColor, fontSize : 15}}>
+                                TFP Recommendation
+                            </Text>
                         </View>
-                    </View>
 
-                    <View style = {{flex : 1, flexDirection : 'column', marginHorizontal : 40}}>
-                        <Text style = {{color : this.props.route.params.themeColor, fontSize : 24, fontWeight : 'bold'}}>{this.props.route.params.item.recom_name}</Text>
-                        <Text style = {{color : 'black', fontSize : 16}}>"{this.props.route.params.item.description}"</Text>
-
-                        <View style = {{flexDirection : 'row', alignItems : 'center', marginVertical : 10, marginRight : 40}}>
-                            <View style = {{width : 100, marginRight : '5%'}}>
-                                <StarRating
-                                    disabled={true}
-                                    maxStars={5}
-                                    rating={Number(this.props.route.params.item.rating)}
-                                    fullStarColor = {'yellow'}
-                                    halfStarColor = {'yellow'}
-                                    emptyStarColor = {'yellow'}
-                                    starSize = {15}
-                                />
+                        <View style = {{flex : 1, alignItems : 'center', flexDirection : 'column'}}>
+                            <Text style = {{color : this.props.route.params.themeColor, fontSize : 26, fontWeight : 'bold'}}>{this.props.route.params.item.recom_name}</Text>
+                            <View style = {{height : 300, width : 350, marginVertical : 30}}>
+                                <Image style={{flex : 1}} source={{uri : imageUrl}} resizeMethod = {'auto'} resizeMode = {'cover'}/>
                             </View>
-                            <Text>{this.props.route.params.item.rating} Review/s</Text>
                         </View>
-                        <View style = {{flexDirection : 'row', marginRight : 40}}>
-                            <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
-                            <Text>Dummy 1</Text>
-                        </View>
-                        <View style = {{flexDirection : 'row', marginRight : 40}}>
-                            <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
-                            <Text>Dummy 2</Text>
-                        </View>
-                        <View style = {{flexDirection : 'row', marginRight : 40}}>
-                            <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
-                            <Text>Dummy 3</Text>
-                        </View>
-                        <View style = {{flexDirection : 'row', marginVertical : 10, alignItems : 'center', marginRight : 80}}>
-                            <Text style = {{color : this.props.route.params.themeColor, fontSize : 16, marginRight : 5}}>Address:</Text>
-                            <Text>{this.props.route.params.item.address}</Text>
-                        </View>
-                        <View style = {{flexDirection : 'row', marginVertical : 10, alignItems : 'center', marginRight : 80}}>
-                            <Text style = {{color : this.props.route.params.themeColor, fontSize : 16, marginRight : 5}}>Hours:</Text>
-                            <Text>Dummy</Text>
-                        </View>
-                        <View style = {{flexDirection : 'row', marginVertical : 10, alignItems : 'center', marginRight : 80}}>
-                            <Text style = {{color : this.props.route.params.themeColor, fontSize : 16, marginRight : 5}}>Phone:</Text>
-                            <Text>{this.props.route.params.item.phone}</Text>
-                        </View>
-                        <Divider style = {{height : 3, backgroundColor : this.props.route.params.themeColor, marginVertical : '5%'}}/>
 
-                        <View style = {{marginLeft : 35, flexDirection : 'column'}}>
-                            <Text style = {{color : this.props.route.params.themeColor, fontSize : 20, fontWeight : 'bold'}}>TFP Rating</Text>
-                            <View style = {{flexDirection : 'row', alignItems : 'center'}}>
-                                <Text style = {{color : 'black', fontSize : 26, fontWeight : 'bold'}}>{this.props.route.params.item.rating}/5</Text>
-                                <View style = {{flexDirection : 'column', marginLeft : 20}}>
-                                    <View style = {{width : 100, marginRight : '5%'}}>
-                                        <StarRating
-                                            disabled={true}
-                                            maxStars={5}
-                                            rating={Number(this.props.route.params.item.rating)}
-                                            fullStarColor = {'yellow'}
-                                            halfStarColor = {'yellow'}
-                                            emptyStarColor = {'yellow'}
-                                            starSize = {15}
-                                        />
+                        <View style = {{flex : 1, flexDirection : 'column', marginHorizontal : 40}}>
+                            <Text style = {{color : this.props.route.params.themeColor, fontSize : 24, fontWeight : 'bold'}}>{this.props.route.params.item.recom_name}</Text>
+                            <Text style = {{color : 'black', fontSize : 16}}>"{this.props.route.params.item.description}"</Text>
+
+                            <View style = {{flexDirection : 'row', alignItems : 'center', marginVertical : 10, marginRight : 40}}>
+                                <View style = {{width : 100, marginRight : '5%'}}>
+                                    <StarRating
+                                        disabled={true}
+                                        maxStars={5}
+                                        rating={Number(this.props.route.params.item.rating)}
+                                        fullStarColor = {'yellow'}
+                                        halfStarColor = {'yellow'}
+                                        emptyStarColor = {'yellow'}
+                                        starSize = {15}
+                                    />
+                                </View>
+                                <Text>{this.props.route.params.item.rating} Review/s</Text>
+                            </View>
+                            <View style = {{flexDirection : 'row', marginRight : 40}}>
+                                <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
+                                <Text>Dummy 1</Text>
+                            </View>
+                            <View style = {{flexDirection : 'row', marginRight : 40}}>
+                                <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
+                                <Text>Dummy 2</Text>
+                            </View>
+                            <View style = {{flexDirection : 'row', marginRight : 40}}>
+                                <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
+                                <Text>Dummy 3</Text>
+                            </View>
+                            <View style = {{flexDirection : 'row', marginVertical : 10, alignItems : 'center', marginRight : 80}}>
+                                <Text style = {{color : this.props.route.params.themeColor, fontSize : 16, marginRight : 5}}>Address:</Text>
+                                <Text>{this.props.route.params.item.address}</Text>
+                            </View>
+                            <View style = {{flexDirection : 'row', marginVertical : 10, alignItems : 'center', marginRight : 80}}>
+                                <Text style = {{color : this.props.route.params.themeColor, fontSize : 16, marginRight : 5}}>Hours:</Text>
+                                <Text>Dummy</Text>
+                            </View>
+                            <View style = {{flexDirection : 'row', marginVertical : 10, alignItems : 'center', marginRight : 80}}>
+                                <Text style = {{color : this.props.route.params.themeColor, fontSize : 16, marginRight : 5}}>Phone:</Text>
+                                <Text>{this.props.route.params.item.phone}</Text>
+                            </View>
+                            <Divider style = {{height : 3, backgroundColor : this.props.route.params.themeColor, marginVertical : '5%'}}/>
+
+                            <View style = {{marginLeft : 35, flexDirection : 'column'}}>
+                                <Text style = {{color : this.props.route.params.themeColor, fontSize : 20, fontWeight : 'bold'}}>TFP Rating</Text>
+                                <View style = {{flexDirection : 'row', alignItems : 'center'}}>
+                                    <Text style = {{color : 'black', fontSize : 26, fontWeight : 'bold'}}>{this.props.route.params.item.rating}/5</Text>
+                                    <View style = {{flexDirection : 'column', marginLeft : 20}}>
+                                        <View style = {{width : 100, marginRight : '5%'}}>
+                                            <StarRating
+                                                disabled={true}
+                                                maxStars={5}
+                                                rating={Number(this.props.route.params.item.rating)}
+                                                fullStarColor = {'yellow'}
+                                                halfStarColor = {'yellow'}
+                                                emptyStarColor = {'yellow'}
+                                                starSize = {15}
+                                            />
+                                        </View>
+                                        <Text>{this.props.route.params.item.rating} Review/s</Text>
                                     </View>
-                                    <Text>{this.props.route.params.item.rating} Review/s</Text>
                                 </View>
                             </View>
-                        </View>
 
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
         );
     }
 }
