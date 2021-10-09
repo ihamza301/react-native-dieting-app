@@ -45,7 +45,7 @@ export default class ProductBox extends React.Component
         }
 
         return (
-            <TouchableOpacity style = {[styles.container, styles.boxWithShadow]} onPress = {() => this.props.navigation.navigate('Product-Detail-Screen', {item : this.props.item})}>
+            <TouchableOpacity style = {[styles.container, styles.boxWithShadow]} onPress = {() => this.props.navigation.navigate('Product-Detail-Screen', {item : this.props.item, fromWishlist : this.props.fromWishlist})}>
                 <View style = {styles.innerContainer}>
                     <Image style={styles.image} source={{uri : imageUrl}} resizeMethod = {'auto'} resizeMode = {'cover'}/>
                     <Text style = {{marginTop : 5}}>

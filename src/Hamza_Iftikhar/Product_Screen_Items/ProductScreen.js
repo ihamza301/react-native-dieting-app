@@ -55,13 +55,13 @@ export default class ProductScreen extends React.Component
                 {
                     this.setState({products : response.data['response']['Products']});
                     this.setState({dataFound : true});
+                    this.setState({visible:false});
                 }
                 else if(response.data['response']['message'] == 'unSuccessful')
                 {
                     this.setState({dataFound : false});
+                    this.setState({visible:false});
                 }
-                
-                this.setState({visible:false});
             }else if(response.data["status"] === "error"){
                 console.log('Error is =',response.data["response"]["message"]);
                 this.setState({visible:false});
@@ -88,7 +88,7 @@ export default class ProductScreen extends React.Component
     render()
     {
         const renderItem = ({ item }) => (
-            <ProductBox item={item} themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation}/>
+            <ProductBox item={item} themeColor = {this.props.route.params.themeColor} navigation = {this.props.navigation} fromWishlist = {false}/>
         );
 
         return(
@@ -141,7 +141,7 @@ class FlatListHeader extends React.Component
                     value={this.props.searchQuery}
                     />
                 <Text style = {{marginHorizontal : 30, marginVertical : 10, color : this.props.themeColor, fontSize : 15}}>
-                    Product
+                    Products
                 </Text>
             </View>
         );

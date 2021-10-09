@@ -5,6 +5,10 @@ import InputSpinner from "react-native-input-spinner";
 
 import MyHeader from '../MyHeader';
 
+import AnimatedLoader from "react-native-animated-loader";
+
+import axios from 'axios';
+
 export default class ProductDetailsScreen extends React.Component
 {
     constructor(props)
@@ -36,7 +40,8 @@ export default class ProductDetailsScreen extends React.Component
         this.state = 
         {
             images : obtainedImages,
-            selectedQuantity : 1
+            selectedQuantity : 1,
+            visible : false
         };
     }
 
@@ -48,6 +53,88 @@ export default class ProductDetailsScreen extends React.Component
     stockCount()
     {
         return this.props.route.params.item.quantity_on_hand === null ? 0 : this.props.route.params.item.quantity_on_hand;
+    }
+
+    addToWishlist()
+    {
+        this.setState({visible:true});
+        const data = 
+        { 
+          'product_id':this.props.route.params.item.pk_id,
+          'user_id':this.props.route.params.userId,
+          'product_name':this.props.route.params.item.name,
+          'price':this.props.route.params.item.price,
+          'image':this.props.route.params.item.thumbnail,
+        };
+
+        const headers = { 
+            'Authorization': 'Bearer ' + this.props.route.params.token,
+            'content-type':'application/json'
+        };
+
+        axios.post('https://thefoodpharmacy.general.greengrapez.com/api/auth/add/to/wishlist', data, {headers}).
+        then(response => {
+            this.setState({visible:false});
+            if(response.data["status"] === "error")
+            {
+                Alert.alert("Error", response.data["response"]);
+            }
+
+            if(response.data["status"] === "successful")
+            {
+              this.props.navigation.navigate('Wishlist');
+            }
+
+            if(response.data["status"] === "UnSuccessful")
+            {
+                Alert.alert("Status", response.data["response"]);
+            }
+        }).
+        catch(error => {
+            Alert.alert("Error", error.message);
+            this.setState({visible:false});
+        });
+    }
+
+    removeFromWishlist()
+    {
+        this.setState({visible:true});
+        const data = 
+        { 
+          'product_id':this.props.route.params.item.pk_id,
+          'user_id':this.props.route.params.userId,
+          'product_name':this.props.route.params.item.name,
+          'price':this.props.route.params.item.price,
+          'image':this.props.route.params.item.thumbnail,
+        };
+
+        const headers = { 
+            'Authorization': 'Bearer ' + this.props.route.params.token,
+            'content-type':'application/json'
+        };
+
+        axios.get('https://thefoodpharmacy.general.greengrapez.com/api/auth/remove/to/wishlist/'+ this.props.route.params.userId +'/' + this.props.route.params.item.pk_id, {headers}).
+        then(response => {
+            this.setState({visible:false});
+            if(response.data["status"] === "error")
+            {
+                Alert.alert("Error", response.data["response"]);
+            }
+
+            if(response.data["status"] === "successful")
+            {
+              this.props.navigation.navigate('Wishlist');
+            }
+
+            if(response.data["status"] === "UnSuccessful")
+            {
+                Alert.alert("Status", response.data["response"]);
+            }
+        }).
+        catch(error => {
+            Alert.alert("Error", error.message);
+            this.setState({visible:false});
+        });
     }
 
     render()
@@ -102,12 +189,29 @@ export default class ProductDetailsScreen extends React.Component
                                 <TouchableOpacity style = {[styles.button, {backgroundColor : this.isProductOutOfStock() ? 'lightgrey' : this.props.route.params.themeColor}]} onPress = {() => Alert.alert('Available soon')} disabled = {this.isProductOutOfStock()}>
                                     <Text style = {styles.buttonText}>Add to Cart</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style = {[styles.button, {backgroundColor : this.props.route.params.themeColor}]} onPress = {() => Alert.alert('Available soon')}>
-                                    <Text style = {styles.buttonText}>Add to Wishlist</Text>
-                                </TouchableOpacity>
+                                {!this.props.route.params.fromWishlist ? (
+                                    <TouchableOpacity style = {[styles.button, {backgroundColor : this.props.route.params.themeColor}]} onPress = {() => this.addToWishlist()}>
+                                        <Text style = {styles.buttonText}>Add to Wishlist</Text>
+                                    </TouchableOpacity>
+                                ) : (
+                                    <TouchableOpacity style = {[styles.button, {backgroundColor : this.props.route.params.themeColor}]} onPress = {() => this.removeFromWishlist()}>
+                                        <Text style = {styles.buttonText}>Remove</Text>
+                                    </TouchableOpacity>
+                                )}
                             </View>
                         </View>
                     </ScrollView>
+                    {this.state.visible?(
+                        <AnimatedLoader
+                        visible={this.state.visible}
+                        overlayColor="rgba(255,255,255,0.75)"
+                        source={require("../loader.json")}
+                        animationStyle={styles.lottie}
+                        speed={1}
+                        >
+                        <Text> Processing...</Text>
+                        </AnimatedLoader>            
+                    ):(null)}
                 </View>
             </SafeAreaView>
         );
@@ -195,5 +299,10 @@ const styles = StyleSheet.create({
     {
         fontSize : 16,
         color : 'white'
+    },
+    lottie:
+    {
+        height : 100,
+        width : 100
     }
 });

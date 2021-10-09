@@ -36,8 +36,8 @@ export default class RecommendationBox extends React.Component
         }
         else
         {
-            //imageUrl = this.props.item.thumbnail;
-            imageUrl = 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80';
+            imageUrl = this.props.item.thumbnail;
+            //imageUrl = 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80';
         }
 
         return (

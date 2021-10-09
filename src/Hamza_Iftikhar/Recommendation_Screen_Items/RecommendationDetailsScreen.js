@@ -27,6 +27,12 @@ export default class RecommendationDetailsScreen extends React.Component
 
     render()
     {
+        let specsDisplay = {specs : this.props.route.params.item.specification, themeColor : this.props.route.params.themeColor};
+        function displaySpecifications(data)
+        {
+            console.log(data.specs);
+            var specifications = data.specs.split("\r\n");
+        }
         let imageUrl = '';
         if(this.props.route.params.item.thumbnail.length === 0)
         {
@@ -48,8 +54,8 @@ export default class RecommendationDetailsScreen extends React.Component
         }
         else
         {
-            //imageUrl = this.props.route.params.item.thumbnail;
-            imageUrl = 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80';
+            imageUrl = this.props.route.params.item.thumbnail;
+            //imageUrl = 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80';
         }
 
         return(
@@ -74,39 +80,20 @@ export default class RecommendationDetailsScreen extends React.Component
                             <Text style = {{color : this.props.route.params.themeColor, fontSize : 24, fontWeight : 'bold'}}>{this.props.route.params.item.recom_name}</Text>
                             <Text style = {{color : 'black', fontSize : 16}}>"{this.props.route.params.item.description}"</Text>
 
-                            <View style = {{flexDirection : 'row', alignItems : 'center', marginVertical : 10, marginRight : 40}}>
-                                <View style = {{width : 100, marginRight : '5%'}}>
-                                    <StarRating
-                                        disabled={true}
-                                        maxStars={5}
-                                        rating={Number(this.props.route.params.item.rating)}
-                                        fullStarColor = {'yellow'}
-                                        halfStarColor = {'yellow'}
-                                        emptyStarColor = {'yellow'}
-                                        starSize = {15}
-                                    />
+                            {this.props.route.params.item.specification.split("\r\n").map((item) => (
+                                <View style = {{flexDirection : 'row', marginRight : 40, marginTop : 20}}>
+                                    <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
+                                    <Text>{item}</Text>
                                 </View>
-                                <Text>{this.props.route.params.item.rating} Review/s</Text>
-                            </View>
-                            <View style = {{flexDirection : 'row', marginRight : 40}}>
-                                <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
-                                <Text>Dummy 1</Text>
-                            </View>
-                            <View style = {{flexDirection : 'row', marginRight : 40}}>
-                                <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
-                                <Text>Dummy 2</Text>
-                            </View>
-                            <View style = {{flexDirection : 'row', marginRight : 40}}>
-                                <Icon style = {{marginVertical : 5, marginRight : '5%'}} name="circle" size={14} color={this.props.route.params.themeColor} />
-                                <Text>Dummy 3</Text>
-                            </View>
+                            ))}
+
                             <View style = {{flexDirection : 'row', marginVertical : 10, alignItems : 'center', marginRight : 80}}>
                                 <Text style = {{color : this.props.route.params.themeColor, fontSize : 16, marginRight : 5}}>Address:</Text>
                                 <Text>{this.props.route.params.item.address}</Text>
                             </View>
                             <View style = {{flexDirection : 'row', marginVertical : 10, alignItems : 'center', marginRight : 80}}>
                                 <Text style = {{color : this.props.route.params.themeColor, fontSize : 16, marginRight : 5}}>Hours:</Text>
-                                <Text>Dummy</Text>
+                                <Text>{this.props.route.params.item.open_time}</Text>
                             </View>
                             <View style = {{flexDirection : 'row', marginVertical : 10, alignItems : 'center', marginRight : 80}}>
                                 <Text style = {{color : this.props.route.params.themeColor, fontSize : 16, marginRight : 5}}>Phone:</Text>
@@ -130,7 +117,6 @@ export default class RecommendationDetailsScreen extends React.Component
                                                 starSize = {15}
                                             />
                                         </View>
-                                        <Text>{this.props.route.params.item.rating} Review/s</Text>
                                     </View>
                                 </View>
                             </View>
