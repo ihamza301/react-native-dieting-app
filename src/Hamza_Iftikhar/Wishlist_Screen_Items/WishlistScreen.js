@@ -51,6 +51,7 @@ export default class WishlistScreen extends React.Component
                 if(response.data['response']['message'] == 'successful')
                 {
                   let list = response.data['response']['Products'];
+                  console.log(list.length);
                   let obtainedProducts = [];
                   for(let i = 0; i < list.length; i++)
                   {
@@ -87,13 +88,24 @@ export default class WishlistScreen extends React.Component
                       this.setState({dataFound : false});
                     });
                   }
+                  if(list.length === 0)
+                  {
+                    this.setState({dataFound : false});
+                    this.setState({visible:false});
+                  }
                 }
                 else if(response.data['response']['message'] == 'unSuccessful')
                 {
                   this.setState({dataFound : false});
                   this.setState({visible:false});
                 }
-            }else if(response.data["status"] === "error"){
+            }
+            else if(response.data["status"] === "UnSuccessful"){
+              console.log('Error is =',response.data["response"]);
+              this.setState({visible:false});
+              this.setState({dataFound : false});
+            }
+            else if(response.data["status"] === "error"){
               console.log('Error is =',response.data["response"]["message"]);
               this.setState({visible:false});
               this.setState({dataFound : false});
@@ -150,7 +162,7 @@ export default class WishlistScreen extends React.Component
                 />
                 ) : (
                     <View>
-                        <Text style = {{fontWeight : 'bold', fontSize : 20, alignSelf : 'center', textAlign : 'center', marginTop : '50%'}}>No products found.</Text>
+                        <Text style = {{fontWeight : 'bold', fontSize : 20, alignSelf : 'center', textAlign : 'center', marginTop : '50%'}}>No wishlist products found.</Text>
                     </View>
                 )}
             </View>
