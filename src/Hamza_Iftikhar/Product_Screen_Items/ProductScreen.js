@@ -51,6 +51,7 @@ export default class ProductScreen extends React.Component
         axios.get('https://thefoodpharmacy.general.greengrapez.com/api/auth/search/product/by/' + this.props.route.params.subCategory, {headers}).
         then(response => {
             if(response.data["status"] === "okay"){
+                console.log('Products Detail is = ', response.data['response']['Products']);
                 if(response.data['response']['message'] == 'successful')
                 {
                     this.setState({products : response.data['response']['Products']});

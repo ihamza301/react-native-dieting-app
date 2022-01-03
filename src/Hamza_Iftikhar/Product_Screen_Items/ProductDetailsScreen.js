@@ -55,6 +55,52 @@ export default class ProductDetailsScreen extends React.Component
         return this.props.route.params.item.quantity_on_hand === null ? 0 : this.props.route.params.item.quantity_on_hand;
     }
 
+    addToCart(){
+        this.setState({visible:true});
+        const data = 
+        { 
+          'product_id':this.props.route.params.item.pk_id,
+          'user_id':this.props.route.params.userId,
+          'product_name':this.props.route.params.item.name,
+          'quantity':this.state.selectedQuantity,
+          'size':this.props.route.params.item.size,
+          'price':this.props.route.params.item.price,
+          'sub_category':this.props.route.params.item.sub_category,
+          'image':this.props.route.params.item.thumbnail,
+        };
+
+        const headers = { 
+            'Authorization': 'Bearer ' + this.props.route.params.token,
+            'content-type':'application/json'
+        };
+
+        axios.post('https://thefoodpharmacy.general.greengrapez.com/api/auth/add/to/cart', data, {headers}).
+        then(response => {
+            this.setState({visible:false});
+            
+            console.log('Add To Cart is = ',response.data);
+
+            if(response.data["status"] === "error")
+            {
+                Alert.alert("Error", response.data["response"]);
+            }
+
+            if(response.data["status"] === "successful")
+            {
+              this.props.navigation.navigate('Wishlist');
+            }
+
+            if(response.data["status"] === "UnSuccessful")
+            {
+                Alert.alert("Status", response.data["response"]);
+            }
+        }).
+        catch(error => {
+            Alert.alert("Error", error.message);
+            this.setState({visible:false});
+        });
+    }
+
     addToWishlist()
     {
         this.setState({visible:true});
@@ -186,7 +232,8 @@ export default class ProductDetailsScreen extends React.Component
                                 </View>
                             </View>
                             <View style = {styles.buttonsView}>
-                                <TouchableOpacity style = {[styles.button, {backgroundColor : this.isProductOutOfStock() ? 'lightgrey' : this.props.route.params.themeColor}]} onPress = {() => Alert.alert('Available soon')} disabled = {this.isProductOutOfStock()}>
+                                <TouchableOpacity style = {[styles.button, {backgroundColor : this.isProductOutOfStock() ? 'lightgrey' : this.props.route.params.themeColor}]} 
+                                onPress = {() => this.addToCart()} disabled = {this.isProductOutOfStock()}>
                                     <Text style = {styles.buttonText}>Add to Cart</Text>
                                 </TouchableOpacity>
                                 {!this.props.route.params.fromWishlist ? (
