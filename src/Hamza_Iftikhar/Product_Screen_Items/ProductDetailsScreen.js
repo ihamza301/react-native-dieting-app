@@ -77,7 +77,6 @@ export default class ProductDetailsScreen extends React.Component
         axios.post('https://thefoodpharmacy.general.greengrapez.com/api/auth/add/to/cart', data, {headers}).
         then(response => {
             this.setState({visible:false});
-            
             console.log('Add To Cart is = ',response.data);
 
             if(response.data["status"] === "error")
@@ -93,6 +92,7 @@ export default class ProductDetailsScreen extends React.Component
             if(response.data["status"] === "UnSuccessful")
             {
                 Alert.alert("Status", response.data["response"]);
+                this.props.navigation.navigate('CartDetailsScreen');
             }
         }).
         catch(error => {
