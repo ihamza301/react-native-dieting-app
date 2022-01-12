@@ -149,7 +149,7 @@ export default class CartDetailsScreen extends React.Component
         const footer = () => {
             return (
                 <View style={{margin:15}}>
-                    <TouchableOpacity style={{margin:5, flexDirection:'row',backgroundColor:'green', alignItems:'center',alignSelf:'flex-end', width:120, height:50}} onPress = {() => this.props.navigation.navigate('Products-Menu-Sub-Category', {category : item.products})}>    
+                    <TouchableOpacity style={{margin:5, flexDirection:'row',backgroundColor:'green', alignItems:'center',alignSelf:'flex-end', width:120, height:50}} onPress = {() => this.props.navigation.navigate('Products-Screen')}>    
                         <Text style={{margin:10, fontSize:14, color:'white'}}>Continue Shop</Text>               
                     </TouchableOpacity>  
                     <Text style={{margin:5, fontWeight:'bold'}}>Sub Totals</Text>               

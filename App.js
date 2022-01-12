@@ -19,6 +19,8 @@ import ProductDetailsScreen from './src/Hamza_Iftikhar/Product_Screen_Items/Prod
 import CartDetailsScreen from './src/Hamza_Iftikhar/Product_Screen_Items/CartDetailsScreen.js';
 import CheckAddressScreen from './src/Hamza_Iftikhar/Product_Screen_Items/CheckAddressScreen.js';
 import AddNewAddressScreen from './src/Hamza_Iftikhar/Product_Screen_Items/AddNewAddressScreen.js';
+import PaymentOptionsScreen from './src/Hamza_Iftikhar/Product_Screen_Items/PaymentOptionsScreen.js';
+import PaymentSubmitScreen from './src/Hamza_Iftikhar/Product_Screen_Items/PaymentSubmitScreen.js';
 import ProductsMenuCategory from './src/Hamza_Iftikhar/Product_Screen_Items/ProductsMenuCategory';
 import ProductsMenuSubCategory from './src/Hamza_Iftikhar/Product_Screen_Items/ProductsMenuSubCategory';
 import AddressAndDetailScreen from './src/Hamza_Iftikhar/AddressAndDetailScreen.js';
@@ -70,6 +72,8 @@ export default class App extends React.Component {
           <SideMenuDrawer.Screen name="CartDetailsScreen" component={CartDetailsScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email, name : props.route.params.name}}/>
           <SideMenuDrawer.Screen name="CheckAddressScreen" component={CheckAddressScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email, name : props.route.params.name}}/>
           <SideMenuDrawer.Screen name="AddNewAddressScreen" component={AddNewAddressScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email, name : props.route.params.name}}/>
+          <SideMenuDrawer.Screen name="PaymentOptionsScreen" component={PaymentOptionsScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email, name : props.route.params.name}}/>
+          <SideMenuDrawer.Screen name="PaymentSubmitScreen" component={PaymentSubmitScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email, name : props.route.params.name}}/>
           <SideMenuDrawer.Screen name="Coaching" component={coachingStackScreens} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email, name : props.route.params.name}}/>
           <SideMenuDrawer.Screen name="Recommendation-Menu" component={RecommendationMenuCategory} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email, name : props.route.params.name}}/>
           <SideMenuDrawer.Screen name="Recommendation-Screen" component={RecommendationScreen} initialParams = {{themeColor : props.route.params.themeColor, token : props.route.params.token, userId : props.route.params.userId, email : props.route.params.email, name : props.route.params.name}}/>

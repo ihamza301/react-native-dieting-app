@@ -132,7 +132,7 @@ export default class CheckAddressScreen extends React.Component
                     <Text style = {{fontSize : 13, margin:5, marginLeft:10}}>Sher Ali Road Lahore</Text>
                </View>
                <View style={{flex:1}}>
-                    <TouchableOpacity style={{backgroundColor:'#1f8e46', flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems:'center',alignSelf:'flex-start', width:'100%', height:50}} onPress = {() => this.props.navigation.navigate('CartDetailsScreen', {category : item.products})}>    
+                    <TouchableOpacity style={{backgroundColor:'#1f8e46', flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems:'center',alignSelf:'flex-start', width:'100%', height:50}} onPress = {() => this.props.navigation.navigate('PaymentOptionsScreen')}>    
                         <Text style={{margin:10,fontSize:14, color:'white'}}>Use This Address</Text>               
                     </TouchableOpacity>      
                </View>   
